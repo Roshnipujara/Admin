@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.db.models import Count
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 
 from DT.functions import handle_uploaded_file
 from DT.models import Patient, City, Area, Doctor, Available_time, Appointment, Specialization, Gallery, Feedback, \
@@ -142,7 +143,11 @@ def logout(request):
         del request.session['username']
     except:
         pass
-    return render(request, "login.html")
+    if request.COOKIES.get("cemail"):
+        print("---------------", request.COOKIES.get('cemail'))
+        return render(request, "login.html",
+                      {'cookie1': request.COOKIES['cemail'], 'cookie2': request.COOKIES['cpass']})
+    return redirect("/login/")
 
 
 def login(request):
@@ -158,7 +163,13 @@ def login(request):
                 n = item.patient_id
             request.session['username'] = name
             request.session['id'] = n
-            return render(request, "home.html")
+
+            if request.POST.get("remember"):
+                response = HttpResponse()
+                response.set_cookie('cemail', request.POST["uname"])
+                response.set_cookie('cpass', request.POST["pwd"])
+                return HttpResponseRedirect("/home/")
+            return redirect("/home/")
         else:
             messages.error(request, 'username or password not correct')
             return render(request, "login.html")
