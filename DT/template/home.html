@@ -1,0 +1,70 @@
+{% extends 'header.html' %}
+{% block content %}
+
+    {% load static %}
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                    </div>
+                    <img src="{% static 'image/home2.jpg' %}" height="550" width="1080">
+                    <br><br>
+					<!-- start widget -->
+					<div class="state-overview">
+						<div class="row">
+					        <div class="col-xl-3 col-md-6 col-12">
+					          <div class="info-box bg-white">
+					            <span class="info-box-icon push-center bg-primary"><i class="material-icons">group</i></span>
+					            <div class="info-box-content">
+                                    <span class="info-box-text">Specialization</span>
+					              <span class="info-box-number">{{ sc }}</span>
+					            </div>
+					            <!-- /.info-box-content -->
+					          </div>
+					          <!-- /.info-box -->
+					        </div>
+					        <!-- /.col -->
+					        <div class="col-xl-3 col-md-6 col-12">
+					          <div class="info-box bg-white">
+					            <span class="info-box-icon push-center bg-warning"><i class="material-icons">group</i></span>
+					            <div class="info-box-content">
+					              <span class="info-box-text">Doctor</span>
+					              <span class="info-box-number">{{ dc }}</span>
+					            </div>
+					            <!-- /.info-box-content -->
+					          </div>
+					          <!-- /.info-box -->
+					        </div>
+					        <!-- /.col -->
+					        <div class="col-xl-3 col-md-6 col-12">
+					          <div class="info-box bg-white">
+					            <span class="info-box-icon push-center bg-success"><i class="material-icons">group</i></span>
+					            <div class="info-box-content">
+					              <span class="info-box-text">Patient</span>
+					              <span class="info-box-number">{{ pc }}</span>
+					            </div>
+					            <!-- /.info-box-content -->
+					          </div>
+					          <!-- /.info-box -->
+					        </div>
+					        <!-- /.col -->
+					        <div class="col-xl-3 col-md-6 col-12">
+					          <div class="info-box bg-white">
+					            <span class="info-box-icon push-center bg-info"><i class="material-icons">insert_invitation</i></span>
+					            <div class="info-box-content">
+					              <span class="info-box-text">Appointment</span>
+					              <span class="info-box-number">{{ ac }}</span>
+					            </div>
+					            <!-- /.info-box-content -->
+					          </div>
+					          <!-- /.info-box -->
+					        </div>
+					        <!-- /.col -->
+					      </div>
+						</div>
+                        </div>
+					</div>
+                </div>
+            </div>
+            <!-- end page content -->
+{% endblock %}

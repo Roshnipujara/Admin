@@ -1,0 +1,114 @@
+{% extends 'header.html' %}
+<html lang="en">
+{% block content %}
+    {% load static %}
+
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Doctors List</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="/home/">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="/doctor/">Doctor</a>&nbsp;
+                                </li>
+
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tabbable-line">
+                                    <div class="tab-pane active fontawesome-demo" id="tab1">
+                                        <div class="row">
+					                        <div class="col-md-12">
+					                            <div class="card  card-box">
+					                                <div class="card-head">
+					                                    <header></header>
+					                                    <div class="tools">
+					                                        <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+						                                    <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+						                                    <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+					                                    </div>
+					                                </div>
+					                                <div class="card-body ">
+					                                  < class="table-scrollable">
+                                                      <body>
+					                                    <table class="table table-hover table-checkable order-column full-width" id="example4">
+					                                         <thead>
+                                                                <tr class="center">
+{#                                                                    <th>Doctor Id</th>#}
+                                                                    <th>Doctor Name</th>
+                                                                    <th>Profile Photo</th>
+                                                                    <th>Contact No</th>
+                                                                    <th>Email</th>
+{#                                                                    <th>Password</th>#}
+{#                                                                    <th>OTP</th>#}
+{#                                                                    <th>OTP Used</th>#}
+                                                                    <th>Address</th>
+                                                                    <th>Licence Image</th>
+                                                                    <th>Clinic Name</th>
+                                                                    <th>Description</th>
+                                                                    <th>Is Active</th>
+                                                                    <th>Visiting Charge</th>
+                                                                    <th>City</th>
+                                                                    <th>Specialization</th>
+{#                                                                    <th>Action</th>#}
+                                                                </tr>
+                                                             </thead>
+
+                                                            <tbody>
+                                                                {% for doctor in doctor %}
+																<tr class="center">
+{#                                                                    <td>{{ doctor.doctor_id }}</td>#}
+                                                                    <td>{{ doctor.doctor_name }}</td>
+{#                                                                    <td>{{ doctor.profile_photo }}</td>#}
+                                                                    <td>
+                                                                        <img src="{% static 'image/' %}{{ doctor.profile_photo }} " height="100" width="100"/>
+                                                                    </td>
+                                                                    <td>{{ doctor.contact_no }}</td>
+                                                                    <td>{{ doctor.email }}</td>
+{#                                                                    <td>{{ doctor.password }}</td>#}
+{#                                                                    <td>{{ doctor.otp }}</td>#}
+{#                                                                    <td>{{ doctor.otp_used }}</td>#}
+                                                                    <td>{{ doctor.address }}</td>
+{#                                                                    <td>{{ doctor.licence_image }}</td>#}
+                                                                    <td>
+                                                                        <img src="{% static 'image/' %}{{ doctor.licence_image }} " height="100" width="100"/>
+                                                                    </td>
+                                                                    <td>{{ doctor.clinic_hospital_name }}</td>
+                                                                    <td>{{ doctor.description }}</td>
+                                                                    <td>{{ doctor.is_active }}</td>
+                                                                    <td>{{ doctor.visiting_charges }}</td>
+                                                                    <td>{{ doctor.city_id.city_name }}</td>
+                                                                    <td>{{ doctor.specialization_id.specialization_name }}</td>
+
+                                                                </tr>
+                                                                {% endfor %}
+
+
+															</tbody>
+					                                    </table>
+                                                      </body>>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+        <!-- end page container -->
+{% endblock %}
+</html>

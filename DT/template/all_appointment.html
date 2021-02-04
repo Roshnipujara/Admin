@@ -1,0 +1,116 @@
+{% extends 'header.html' %}
+<html lang="en">
+{% block content %}
+    {% load static %}
+
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Appointment List</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="/home/">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="/appointment/">Appointment</a>&nbsp;
+                                </li>
+
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tabbable-line">
+                                    <div class="tab-pane active fontawesome-demo" id="tab1">
+                                        <div class="row">
+					                        <div class="col-md-12">
+					                            <div class="card  card-box">
+					                                <div class="card-head">
+					                                    <header></header>
+					                                    <div class="tools">
+					                                        <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+						                                    <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+						                                    <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+					                                    </div>
+					                                </div>
+					                                <div class="card-body ">
+					                                  < class="table-scrollable">
+                                                      <body>
+					                                    <table class="table table-hover table-checkable order-column full-width" id="example4">
+					                                         <thead>
+                                                                <tr class="center">
+{#                                                                    <th>Appointment Id</th>#}
+                                                                    <th>Appointment Date</th>
+                                                                    <th>Appointment Time</th>
+                                                                    <th>Status</th>
+                                                                    <th>Appointment Description</th>
+{#                                                                    <th>Payment Date</th>#}
+{#                                                                    <th>Amount</th>#}
+{#                                                                    <th>Payment Status</th>#}
+                                                                    <th>Doctor</th>
+                                                                    <th>Patient</th>
+{#                                                                    <th>Action</th>#}
+                                                                </tr>
+                                                             </thead>
+
+                                                            <tbody>
+                                                                {% for appointment in appointment %}
+																<tr class="center">
+{#                                                                    <td>{{ appointment.appointment_id }}</td>#}
+                                                                    <td>{{ appointment.appointment_date|date:" d M, Y" }}</td>
+                                                                    <td>{{ appointment.appointment_time }}</td>
+{#                                                                    <td>{{ appointment.status }}</td>#}
+                                                                    {%  if appointment.status  == 0 %}
+                                                                        <td>Accept / Reject</td>
+                                                                    {%   elif appointment.status  == 1 %}
+                                                                        <td>Confirm / Not Confirm</td>
+                                                                    {%   elif appointment.status  == 2 %}
+                                                                        <td>Reject</td>
+                                                                    {%   elif appointment.status  == 3 %}
+                                                                        <td>Confirm</td>
+                                                                    {%   elif appointment.status  == 4 %}
+                                                                        <td>Not Confirm</td>
+
+                                                                    {% endif %}
+                                                                    <td>{{ appointment.a_description }}</td>
+{#                                                                    <td>{{ appointment.payment_date }}</td>#}
+{#                                                                    <td>{{ appointment.amount }}</td>#}
+{#                                                                    <td>{{ appointment.payment_status }}</td>#}
+                                                                    <td>{{ appointment.doctor_id.doctor_name }}</td>
+                                                                    <td>{{ appointment.patient_id.patient_name }}</td>
+{#                                                                    <td class="center">#}
+{#																		<a href="edit_patient.html" class="btn btn-tbl-edit btn-xs">#}
+{#																			<i class="fa fa-pencil"></i>#}
+{#																		</a>#}
+{#																		<a href="/patient_del/{{ patient.patient_id }}" class="btn btn-tbl-delete btn-xs">#}
+{#																			<i class="fa fa-trash-o "></i>#}
+{#																		</a>#}
+{#																	</td>#}
+                                                                </tr>
+                                                                {% endfor %}
+
+
+															</tbody>
+					                                    </table>
+                                                      </body>>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+            <!-- end chat sidebar -->
+        </div>
+    </body>
+        <!-- end page container -->
+{% endblock %}
+</html>

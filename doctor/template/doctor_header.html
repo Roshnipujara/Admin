@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+    {% load static %}
+<html lang="en">
+<!-- BEGIN HEAD -->
+
+<!-- Mirrored from radixtouch.in/templates/admin/sunray/source/light/tableData.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 24 Sep 2019 05:55:48 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta name="description" content="Responsive Admin Template" />
+    <meta name="author" content="Sunray" />
+    <title>DocTweetUp | Bootstrap Responsive Hospital Admin Template</title>
+    <!-- google font -->
+    <link href="https:/fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
+	<!-- icons -->
+    <link href="{% static 'fonts/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="https:/fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- bootstrap -->
+	<link href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- data tables -->
+    <link href="{% static 'assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css"/>
+	<!-- Material Design Lite CSS -->
+	<link href="{% static 'assets/plugins/material/material.min.css' %}" rel="stylesheet" >
+	<link href="{% static 'assets/css/material_style.css' %}" rel="stylesheet">
+	<!-- Theme Styles -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/plugins.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/responsive.css' %}" rel="stylesheet" type="text/css" />
+	<link href="{% static 'assets/css/theme-color.css' %}" rel="stylesheet" type="text/css" />
+	<!-- favicon -->
+    <link rel="shortcut icon" href="{% static 'http://radixtouch.in/templates/admin/sunray/source/assets/img/favicon.ico' %}" />
+ </head>
+<!-- END HEAD -->
+<body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white dark-color logo-dark">
+    <div class="page-wrapper">
+        <!-- start header -->
+		<div class="page-header navbar navbar-fixed-top">
+            <div class="page-header-inner ">
+                <!-- logo start -->
+                <div class="page-logo">
+                    <a href="index.html">
+{#                    <img alt="" src="{% statics 'assets/img/logo.png' %}">#}
+                    <span class="logo-default" >DocTweetUp</span> </a>
+                </div>
+                <!-- logo end -->
+				<ul class="nav navbar-nav navbar-left in">
+					<li><a href="#" class="menu-toggler sidebar-toggler font-size-20"><i class="fa fa-exchange" aria-hidden="true"></i></a></li>
+				</ul>
+                 <!-- Start Apps Dropdown -->
+                 <ul class="nav navbar-nav navbar-left in">
+				 	<li class="dropdown dropdown-extended dropdown-notification" >
+                            <a href="javascript:" class="dropdown-toggle app-list-icon font-size-20" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <i class="fa fa-th" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu app-icon">
+                            	<li class="app-dropdown-header">
+                                    <p><span class="bold">Applications</span></p>
+                                </li>
+                                <li>
+                                    <ul class="dropdown-menu-list app-icon-dropdown" data-handle-color="#637283">
+										<li>
+											<a href="add_patient.html" class="patient-icon">
+											<i class="material-icons">local_hotel</i>
+											<span class="block">Add Patient</span>
+											</a>
+										</li>
+										<li>
+											<a href="email_inbox.html" class="email-icon">
+											<i class="material-icons">drafts</i>
+											<span class="block">Email</span>
+											</a>
+										</li>
+										<li>
+											<a href="view_appointment.html" class="appoint-icon">
+											<i class="material-icons">assignment</i>
+											<span class="block">Appointment</span>
+											</a>
+										</li>
+										<li>
+											<a href="all_doctors.html" class="doctor-icon">
+											<i class="material-icons">people</i>
+											<span class="block">Doctors</span>
+											</a>
+										</li>
+										<li>
+											<a href="google_maps.html" class="map-icon">
+											<i class="material-icons">map</i>
+											<span class="block">Map</span>
+											</a>
+										</li>
+										<li>
+											<a href="payments.html" class="payment-icon">
+											<i class="material-icons">monetization_on</i>
+											<span class="block">Payments</span>
+											</a>
+										</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                 </ul>
+                 <!-- End Apps Dropdown -->
+                <ul class="nav navbar-nav navbar-left in">
+                	<!-- start full screen button -->
+                    <li><a href="javascript:" class="fullscreen-click font-size-20"><i class="fa fa-arrows-alt"></i></a></li>
+                    <!-- end full screen button -->
+                </ul>
+                <!-- start mobile menu -->
+                <a href="javascript:" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span></span>
+                </a>
+               <!-- end mobile menu -->
+                <!-- start header menu -->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+
+ 						<!-- start manage user dropdown -->
+ 						<li class="dropdown dropdown-user">
+                            {% for doctor in doctor %}
+                            <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <img alt="" class="img-circle " src="{% static 'image/' %}{{ doctor.profile_photo }}" />
+                            </a>
+                            {% endfor %}
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a href="/doctor/doctor_edit/{{ request.session.id }}">
+                                        <i class="fa fa-user"></i> Profile </a>
+                                </li>
+
+                                <li class="divider"> </li>
+                                <li>
+                                    <a href="lock_screen.html">
+                                        <i class="fa fa-lock"></i> Lock
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/doctor/doctor_logout/">
+                                        <i class="fa fa-sign-out"></i> Log Out </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- end manage user dropdown -->
+{#                        <li class="dropdown dropdown-quick-sidebar-toggler">#}
+{#                             <a id="headerSettingButton" class="mdl-button mdl-js-button mdl-button--icon pull-right" data-upgraded=",MaterialButton">#}
+{#	                           <i class="material-icons">settings</i>#}
+{#	                        </a>#}
+{#                        </li>#}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- end header -->
+        <!-- start page container -->
+        <div class="page-container">
+ 			<!-- start sidebar menu -->
+ 			<div class="sidebar-container">
+ 				<div class="sidemenu-container navbar-collapse collapse fixed-menu">
+	                <div id="remove-scroll" class="left-sidemenu">
+	                    <ul class="sidemenu  page-header-fixed slimscroll-style" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+	                        <li class="sidebar-toggler-wrapper hide">
+	                            <div class="sidebar-toggler">
+	                                <span></span>
+	                            </div>
+	                        </li>
+	                        <li class="sidebar-user-panel">
+                                {% for doctor in doctor %}
+	                            <div class="user-panel">
+	                                <div class="pull-left image">
+	                                    <img src="{% static 'image/' %}{{ doctor.profile_photo }}" class="img-circle user-img-circle" alt="User Image" />
+	                                </div>
+	                                <div class="pull-left info">
+	                                    <p> Dr. {{ doctor.doctor_name }}</p>
+	                                    <small>{{ doctor.specialization_id.specialization_name }}</small>
+	                                </div>
+	                            </div>
+                                {% endfor %}
+	                        </li>
+	                        <li class="nav-item">
+	                            <a href="/doctor/doctor_home/" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Dashboard</span>
+
+	                            </a>
+
+	                        </li>
+                            <li class="nav-item  ">
+	                            <a href="/doctor/all_doctor_city/" class="nav-link nav-toggle"> <i class="material-icons">location_city</i>
+	                                <span class="title">City</span>
+	                            </a>
+	                        </li>
+                            <li class="nav-item  ">
+	                            <a href="/doctor/all_doctor_area/" class="nav-link nav-toggle"> <i class="material-icons">map</i>
+	                                <span class="title">Area</span>
+	                            </a>
+	                        </li>
+                            <li class="nav-item  ">
+	                            <a href="/doctor/all_doctor_patient/" class="nav-link nav-toggle"> <i class="material-icons">accessible</i>
+	                                <span class="title">Patient</span>
+	                            </a>
+	                        </li>
+{#                            <li class="nav-item  ">#}
+{#	                            <a href="/patient_update/" class="nav-link nav-toggle"> <i class="material-icons">accessible</i>#}
+{#	                                <span class="title">Update Admin</span>#}
+{#	                            </a>#}
+{#	                        </li>#}
+                            <li class="nav-item  ">
+	                            <a href="/doctor/all_doctor/" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                                <span class="title">Doctor</span>
+	                            </a>
+	                        </li>
+
+
+                            <li class="nav-item  ">
+	                            <a href="/doctor/all_doctor_available_time/" class="nav-link nav-toggle"> <i class="material-icons">event_available</i>
+	                                <span class="title">Available time</span>
+	                            </a>
+	                        </li>
+
+                            <li class="nav-item  ">
+	                            <a href="/doctor/all_doctor_appointment/" class="nav-link nav-toggle"> <i class="material-icons">event</i>
+	                                <span class="title">Appointment</span>
+	                            </a>
+	                        </li>
+
+                            <li class="nav-item  ">
+	                            <a href="/doctor/all_doctor_specialization/" class="nav-link nav-toggle"> <i class="material-icons">folder_special</i>
+	                                <span class="title">Specialization</span>
+	                            </a>
+	                        </li>
+
+                            <li class="nav-item  ">
+	                            <a href="/doctor/all_doctor_gallery/" class="nav-link nav-toggle"> <i class="material-icons">image</i>
+	                                <span class="title">Gallery</span>
+	                            </a>
+	                        </li>
+
+                            <li class="nav-item  ">
+	                            <a href="/doctor/all_doctor_feedback/" class="nav-link nav-toggle"> <i class="material-icons">feedback</i>
+	                                <span class="title">Feedback</span>
+	                            </a>
+	                        </li>
+
+
+                            <li class="nav-item  ">
+	                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                                <span class="title">Reports</span> <span class="arrow"></span>
+	                            </a>
+	                            <ul class="sub-menu">
+	                                <li class="nav-item  ">
+	                                    <a href="/doctor/patient_render/pdf/" class="nav-link "> <span class="title">Patient Report</span>
+	                                    </a>
+	                                </li>
+
+                                    <li class="nav-item  ">
+	                                    <a href="/doctor/appointment_render/pdf/" class="nav-link "> <span class="title">Appointment Report</span>
+	                                    </a>
+	                                </li>
+                                </ul>
+	                        </li>
+
+	                    </ul>
+	                </div>
+                </div>
+            </div>
+		</div>		 <!-- end sidebar menu -->
+	</div>
+        {% block content %}
+        {% endblock %}
+
+    <footer>
+        <!-- start footer -->
+        <div class="page-footer">
+            <div class="page-footer-inner"> 2019 &copy; DocTweetUp
+                <a href="mailto:redstartheme@gmail.com" target="_top" class="makerCss"></a>
+            </div>
+            <div class="scroll-to-top">
+                <i class="material-icons">eject</i>
+            </div>
+        </div>
+        <!-- end footer -->
+
+	</footer>
+    <!-- start js include path -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}" ></script>
+	<script src="{% static 'assets/plugins/popper/popper.min.js' %}" ></script>
+    <script src="{% static 'assets/plugins/jquery-blockui/jquery.blockui.min.js' %}" ></script>
+	<script src="{% static 'assets/plugins/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
+    <!-- bootstrap -->
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}" ></script>
+    <!-- data tables -->
+    <script src="{% static 'assets/plugins/datatables/jquery.dataTables.min.js' %}" ></script>
+ 	<script src="{% static 'assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js' %}" ></script>
+    <script src="{% static 'assets/js/pages/table/table_data.js' %}" ></script>
+    <!-- Common js-->
+	<script src="{% static 'assets/js/app.js' %}" ></script>
+    <script src="{% static 'assets/js/layout.js' %}" ></script>
+	<script src="{% static 'assets/js/theme-color.js' %}" ></script>
+	<!-- Material -->
+	<script src="{% static 'assets/plugins/material/material.min.js' %}"></script>
+    <!-- end js include path -->
+</footer>
+</body>
+
+<!-- Mirrored from radixtouch.in/templates/admin/sunray/source/light/tableData.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 24 Sep 2019 05:55:48 GMT -->
+</html>

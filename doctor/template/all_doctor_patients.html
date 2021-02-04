@@ -1,0 +1,106 @@
+{% extends 'doctor_header.html' %}
+
+<html lang="en">
+{% block content %}
+    {% load static %}
+
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Patients List</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Patients</a>
+                                </li>
+
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tabbable-line">
+                                    <div class="tab-pane active fontawesome-demo" id="tab1">
+                                        <div class="row">
+					                        <div class="col-md-12">
+					                            <div class="card  card-box">
+					                                <div class="card-head">
+					                                    <header></header>
+					                                    <div class="tools">
+					                                        <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+						                                    <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+						                                    <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+					                                    </div>
+					                                </div>
+					                                <div class="card-body ">
+					                                  <div class="table-scrollable">
+                                                      <body>
+					                                    <table class="table table-hover table-checkable order-column full-width" id="example4">
+					                                         <thead>
+                                                                <tr class="center">
+{#                                                                    <th>Patient Id</th>#}
+                                                                    <th>Patient Name</th>
+                                                                    <th>Address</th>
+                                                                    <th>Gender</th>
+                                                                    <th>Contact No</th>
+                                                                    <th>Email</th>
+{#                                                                    <th>Password</th>#}
+{#                                                                    <th>Is Admin</th>#}
+{#                                                                    <th>OTP</th>#}
+{#                                                                    <th>OTP Used</th>#}
+                                                                    <th>Area</th>
+{#                                                                    <th>Action</th>#}
+                                                                </tr>
+                                                             </thead>
+
+                                                            <tbody>
+                                                                {% for patient in patient %}
+																<tr class="center">
+{#                                                                    <td>{{ patient.patient_id }}</td>#}
+                                                                    <td>{{ patient.patient_name }}</td>
+                                                                    <td>{{ patient.address }}</td>
+                                                                    <td>{{ patient.gender }}</td>
+                                                                    <td>{{ patient.contact_no }}</td>
+                                                                    <td>{{ patient.email }}</td>
+{#                                                                    <td>{{ patient.password }}</td>#}
+{#                                                                    <td>{{ patient.is_admin }}</td>#}
+{#                                                                    <td>{{ patient.otp }}</td>#}
+{#                                                                    <td>{{ patient.otp_used }}</td>#}
+                                                                    <td>{{ patient.area_id.area_name }}</td>
+{#                                                                    <td class="center">#}
+{#																		<a href="/patient_edit/{{ patient.patient_id }}" class="btn btn-tbl-edit btn-xs">#}
+{#																			<i class="fa fa-pencil"></i>#}
+{#																		</a>#}
+{#																		<a href="/patient_del/{{ patient.patient_id }}" class="btn btn-tbl-delete btn-xs">#}
+{#																			<i class="fa fa-trash-o "></i>#}
+{#																		</a>#}
+{#																	</td>#}
+                                                                </tr>
+                                                                {% endfor %}
+
+
+															</tbody>
+					                                    </table>
+                                                      </body>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+        </div>
+    </body>
+        <!-- end page container -->
+{% endblock %}
+</html>

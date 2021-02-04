@@ -1,0 +1,157 @@
+{% extends 'doctor_header.html' %}
+
+<html lang="en">
+{% block content %}
+    {% load static %}
+
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Appointment List</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">Appointment</a>
+                                </li>
+
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tabbable-line">
+                                    <div class="tab-pane active fontawesome-demo" id="tab1">
+                                        <div class="row">
+					                        <div class="col-md-12">
+					                            <div class="card  card-box">
+					                                <div class="card-head">
+					                                    <header></header>
+					                                    <div class="tools">
+					                                        <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+						                                    <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+						                                    <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+					                                    </div>
+					                                </div>
+					                                <div class="card-body ">
+					                                  <div class="table-scrollable">
+                                                      <body>
+					                                    <table class="table table-hover table-checkable order-column full-width" id="example4">
+					                                         <thead>
+                                                                <tr class="center">
+{#                                                                    <th>Appointment Id</th>#}
+                                                                    <th>Appointment Date</th>
+                                                                    <th>Appointment Time</th>
+{#                                                                    <th>Status</th>#}
+                                                                    <th>Appointment Description</th>
+{#                                                                    <th>Amount</th>#}
+{#                                                                    <th>Payment Status</th>#}
+                                                                    <th>Doctor</th>
+                                                                    <th>Patient</th>
+                                                                    <th>Status</th>
+                                                                </tr>
+                                                             </thead>
+
+                                                            <tbody>
+                                                                {% for appointment in appointment %}
+																<tr class="center">
+{#                                                                    <td>{{ appointment.appointment_id }}</td>#}
+                                                                    <td width="150">{{ appointment.appointment_date }}</td>
+                                                                    <td>{{ appointment.appointment_time }}</td>
+
+                                                                    <td>{{ appointment.a_description }}</td>
+{#                                                                    <td>{{ appointment.amount }}</td>#}
+{#                                                                    <td>{{ appointment.payment_status }}</td>#}
+                                                                    <td>{{ appointment.doctor_id.doctor_name }}</td>
+                                                                    <td>{{ appointment.patient_id.patient_name }}</td>
+                                                                     <td width="210">
+{#                                                                        {{ appointment.status }}#}
+                                                                         {%  if appointment.status  == 0 %}
+{#                                                                            print pending#}
+
+																			<a href="/doctor/accept/{{ appointment.appointment_id }}" class="btn btn-success">
+{#																			    Accepted#}
+                                                                            <i class="material-icons">event_available</i>
+                                                                            </a>
+{#                                                                             <br/><br/>#}
+                                                                            <a href="/doctor/reject/{{ appointment.appointment_id }}" class="btn btn-danger">
+{#																			    Rejected#}
+                                                                            <i class="material-icons">event_busy</i>
+                                                                            </a>
+
+                                                                         <br/><br/>
+                                                                           {% endif %}
+
+                                                                         {%  if  appointment.status  == 1 %}
+                                                                              <a href="/doctor/confirm/{{ appointment.appointment_id }}" class="btn btn-success">
+{#																			    Confirm#}
+                                                                              <i class="material-icons">mood</i>
+                                                                              </a>
+{#                                                                             <br><br>#}
+                                                                             <a href="/doctor/not_confirm/{{ appointment.appointment_id }}" class="btn btn-danger">
+{#																			    Not Confirm#}
+                                                                             <i class="material-icons">mood_bad</i>
+                                                                             </a>
+
+                                                                         {%   elif appointment.status  == 2 %}
+                                                                            <a href="/doctor/reject/{{ appointment.appointment_id }}" class="btn btn-danger">
+{#																			    Rejected#}
+                                                                            <i class="material-icons">event_busy</i>
+                                                                            </a>
+                                                                         {% endif %}
+
+                                                                     {%  if  appointment.status  == 3 %}
+                                                                              <a href="/doctor/doctor_prescription_insert/{{ appointment.appointment_id }}" class="btn btn-success">
+{#																			    Prescription#}
+                                                                              <i class="material-icons">note_add</i>
+                                                                              </a>
+{#                                                                         <br><br>#}
+                                                                            <a href="/doctor/doctor_prescription/{{ appointment.appointment_id }}" class="btn btn-success">
+{#																			    View Prescription#}
+                                                                            <i class="material-icons">description</i>
+                                                                            </a>
+{#                                                                         <br><br>#}
+                                                                            <a href="/doctor/all_doctor_medical_report/{{ appointment.appointment_id }}" class="btn btn-success">
+{#																			    View Medical Report#}
+                                                                            <i class="material-icons">assignment</i>
+                                                                            </a>
+
+
+                                                                         {%   elif appointment.status  == 4 %}
+                                                                            <a href="/doctor/not_confirm/{{ appointment.appointment_id }}" class="btn btn-danger">
+{#																			    Not Confirm#}
+                                                                            <i class="material-icons">mood_bad</i>
+                                                                            </a>
+                                                                         {% endif %}
+
+
+
+                                                                    </td>
+                                                                </tr>
+                                                                {% endfor %}
+
+
+															</tbody>
+					                                    </table>
+                                                      </body>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+        <!-- end page container -->
+{% endblock %}
+</html>

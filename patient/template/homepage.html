@@ -1,0 +1,307 @@
+{% extends 'patient_header.html' %}
+{% block content %}
+    {% load static %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                        <script>
+                        $(document).ready(function() {
+
+                            $("#specialization_id").change(function () {
+                                var url = $("#appointForm").attr("data-doctor-url");
+                                var SId = $(this).val();
+                                {#alert(url);#}
+                                $.ajax({
+                                    url: url,
+                                    data: {
+                                        'special': SId
+                                    },
+                            success: function (data) {
+                                $("#doctor_id").html(data);  // replace the contents of the city input with the data that came from the server
+                                {#alert(data);#}
+                            }
+                            });
+
+                            });
+                        });
+                       </script>
+<!--Hero Area-->
+    <section class="hero-section">
+        <div class="hero-area-1">
+            <div class="single-hero" style='background-image: url({% static 'assets/images/hero-1.jpg' %});" no-repeat cover'>
+                <div class="container" style="position: relative">
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <div class="hero-sub">
+                                <div class="table-cell">
+                                    <div class="hero-left">
+                                        <h1>Meet with your best <br>Doctor here</h1>
+                                        <p>Find the suitable medical specialist to take care of your health and well-being. Healthcare made easy.</p>
+{#<br>#}
+                                        <a href="/patient/patient_appointment_page/" class="bttn-mid btn-fill mr-20">appointment</a>
+
+                                        <a href="/patient/patient_about_us/" class="bttn-mid btn-emt">Learn More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-widgets">
+                        <div class="single-hero-widget primary-bg-dark">
+                            <div class="widget-icon">
+                                <i class="flaticon-clock"></i>
+                            </div>
+                            <div class="widget-content">
+                                <h4>Open</h4>
+                                <p>24 x 7</p>
+                            </div>
+                        </div>
+                        <div class="single-hero-widget primary-bg">
+                            <div class="widget-icon">
+                                <i class="flaticon-pin"></i>
+                            </div>
+                            <div class="widget-content">
+                                <h4>Office Addresses</h4>
+                                <p>Chandkheda, Ahmedabad </p>
+                            </div>
+                        </div>
+                        <div class="single-hero-widget primary-bg-dark">
+                            <div class="widget-icon">
+                                <i class="flaticon-mail"></i>
+                            </div>
+                            <div class="widget-content">
+                                <h4>Email Address</h4>
+                                <p>rds998198@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/Hero Area-->
+
+    <!--appointment Area-->
+    <section class="appointment-area appoint-doc section-padding pb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12 wow fadeInLeft" data-wow-delay="0.4s">
+                    <img src="{% static 'assets/images/doctor.png'%}" alt="">
+                </div>
+                <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12 wow fadeInRight" data-wow-delay="0.4s">
+                    <div class="appointment-content appoint-margin">
+                        <div class="section-title centered">
+                            <h2>Book appointment</h2>
+                        </div>
+                        <form method="POST" id="appointForm" action="/patient/patient_homeappointment/" data-doctor-url="{% url 'ajax_load_doctors' %}">
+                            {% csrf_token %}
+
+                            <div class="appoint-select">
+                                <select name="specialization_id" id="specialization_id">
+                                    <option>Select Specialties</option>
+                                    {% for s in specialization %}
+                                    <option value="{{ s.specialization_id }}">{{ s.specialization_name }}</option>
+                                     {% endfor %}
+                                </select>
+                            </div>
+                            <div class="appoint-select">
+                                <select name="doctor_id" id="doctor_id">
+                                    <option>Select Doctors</option>
+                                    {% for d in doctor %}
+                                    <option value="{{ d.doctor_id }}">{{ d.doctor_name }}</option>
+                                     {% endfor %}
+                                </select>
+                            </div>
+
+                            <input type="hidden" id="patient_id" value="{{request.session.pid}}" name="patient_id" />
+                            <input type="text" id="datepicker" value="{{appointment.appointment_date}}" name="appointment_date" placeholder="Appointment Date"/>
+                            <input type="time" value="{{appointment.appointment_time}}" name="appointment_time" placeholder="time"/>
+                            <input type="text" value="{{appointment.a_description}}" name="a_description" placeholder="Description"/>
+                            <input type="number" value="0" name="status" id="status" style="display: none"/>
+                            <button type="submit" class="bttn-mid btn-fill">Book Your appointment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/appointment Area-->
+
+    <!-- Services Area -->
+    <section class="services-area section-padding-2 gray-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-7 col-md-7 col-sm-10 centered wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="section-title">
+                        <h2>Our Services</h2>
+{#                        <p>Condimentum rutrum placerat egestas condimentum mi eros. Eleifend cras quirntum  Feugiat elit placerat. Diam tempor  malesuada</p>#}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="single-service">
+                        <div class="service-icon primary-light-bg"><i class="flaticon-clinic primary-bg"></i></div>
+                        <h3>Cardiology</h3>
+                        <p>Treatment of congenital heart defects, coronary artery disease, heart failure, valvular heart disease and electrophysiology.</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="single-service">
+                        <div class="service-icon yellow-light-bg"><i class="flaticon-tooth-1 yellow-bg"></i></div>
+                        <h3>Dental Surgery</h3>
+                        <p>Is a surgeon who specializes in dentistry, the diagnosis, prevention, and treatment of diseases and conditions of the oral cavity.</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-2 col-sm-2 wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="single-service">
+                        <div class="service-icon purple-light-bg"><i class="flaticon-eye purple-bg"></i></div>
+                        <h3>Ophthalmology</h3>
+                        <p>Ophthalmology is a branch of medicine specializing in the anatomy, function and diseases of the eye.<br><br></p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="single-service">
+                        <div class="service-icon purple-light-bg"><i class="flaticon-scissor purple-bg"></i></div>
+                        <h3>Gynaecological</h3>
+                        <p>Gynaecology or gynecology is the medical practice dealing with the health of the female reproductive systems and the breasts.<br><br></p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.8s">
+                    <div class="single-service">
+                        <div class="service-icon primary-light-bg"><i class="flaticon-pill primary-bg"></i></div>
+                        <h3>Outpatient surgery</h3>
+                        <p>Outpatient surgery, also known as ambulatory surgery, day surgery, day case surgery, or same-day surgery, is surgery that does not require an overnight hospital stay.</p>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.9s">
+                    <div class="single-service">
+                        <div class="service-icon yellow-light-bg"><i class="flaticon-lab yellow-bg"></i></div>
+                        <h3>Laboratory analysis</h3>
+                        <p>Laboratory tests are often part of a routine checkup to look for changes in your health.<br><br><br></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- /Services Area -->
+
+    <!--Team Area -->
+    <section class="team-area section-padding-2">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-7 col-md-8 col-sm-10 centered wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="section-title">
+                        <h2>Our Expert Doctor</h2>
+{#                        <p>Condimentum rutrum placerat egestas condimentum mi eros. Eleifend cras quirntum  Feugiat elit placerat. Diam tempor malesuada</p>#}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+            {% for d in doctor %}
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="single-team">
+                        <div class="team-thumb">
+
+                                <img src="{% static '/image/'%}{{ d.profile_photo}}" alt="">
+                        </div>
+                        <div class="team-title">
+                            <h3>{{ d.doctor_name}}</h3>
+                            <p>{{ d.specialization_id.specialization_name }}</p>
+                            <p>Experience : {{ d.year_of_experience }} years</p>
+                            <p>{{ d.clinic_hospital_name }}</p>
+                        </div>
+                    </div>
+                </div>
+    {% endfor %}
+
+            </div>
+        </div>
+    </section><!--/Team Area -->
+
+    <!-- Counter Area -->
+    <section class="counter-area section-padding-2 gray-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="single-counter">
+                        <h3 class="count primary-bg">{{ cd }}</h3>
+                        <h5>Total Doctors</h5>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="single-counter">
+                        <h3 class="count yellow-bg">{{ cp }}</h3>
+                        <h5>Total Patients</h5>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="single-counter">
+                        <h3 class="count purple-bg">10</h3>
+                        <h5>Consultation room</h5>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="single-counter">
+                        <h3 class="count blue-bg">4</h3>
+                        <h5>ICU support</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- /Counter Area -->
+
+
+    <!--Call to action Area-->
+    <section class="call-to-action primary-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 wow fadeInLeft" data-wow-delay="0.3s">
+                    <h3>30% off any diganestic let's check</h3>
+                    <p>You can get upto 30% off for 45 days in here ! So Contact with Us</p>
+                </div>
+                <div class="col-lg-6 col-md-12 wow fadeInRight" data-wow-delay="0.3s">
+                    <div class="get-service-btn mt-10">
+                        <a class="bttn-mid btn-wht" href="/patient/patient_contact_us/">Get Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/Call to action Area-->
+
+    <!-- Review Area -->
+    <section class="review-area section-padding-2 white-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-7 col-md-8 col-sm-10 centered wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="section-title">
+{#                        <h2>Client Testimonial</h2>#}
+                          <h2>Feedback</h2>
+{#                        <p>Condimentum rutrum placerat egestas condimentum mi eros. Eleifend cras quirntum  Feugiat elit placerat. Diam tempor  malesuada</p>#}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="reviews owl-carousel">
+                        {% for f in feedback %}
+                            {%  if  f.is_approve  == 1 %}
+                        <div class="single-review">
+                            <p>{{ f.description }}</p>
+                            <div class="reviewer-thumb">
+
+                                <h3>{{ f.patient_id.patient_name }}</h3>
+                                <span><strong>Dr. {{ f.doctor_id.doctor_name }}</strong></span>
+                                <span>{{ f.feedback_date }}</span>
+                            </div>
+                        </div>
+                            {% endif %}
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- /Review Area -->
+
+
+
+{% endblock %}

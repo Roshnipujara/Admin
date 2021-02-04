@@ -1,0 +1,83 @@
+{% extends 'doctor_header.html' %}
+
+<html lang="en">
+{% block content %}
+    {% load static %}
+
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">City List</div>
+{#                                <a class="parent-item" href="/city_insert/">Insert</a>#}
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="#">City</a>&nbsp;
+                                </li>
+
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                                    <div class="tab-pane active fontawesome-demo" id="tab1">
+                                        <div class="row">
+					                        <div class="col-md-12">
+					                            <div class="card  card-box">
+					                                <div class="card-head">
+{#					                                    <header>#}
+{#                                                            <a class="parent-item" href="/city_insert/">Insert</a>#}
+{#                                                        </header>#}
+					                                    <div class="tools">
+					                                        <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+						                                    <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+						                                    <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+					                                    </div>
+					                                </div>
+					                                <div class="card-body ">
+					                                  <div class="table-scrollable">
+                                                      <body>
+					                                    <table class="table table-hover table-checkable order-column full-width" id="example4">
+					                                         <thead>
+                                                                <tr class="center">
+{#                                                                    <th>City Id</th>#}
+                                                                    <th>City Name</th>
+{#                                                                    <th>Action</th>#}
+                                                                </tr>
+                                                             </thead>
+
+                                                            <tbody>
+                                                                {% for city in city %}
+																<tr class="center">
+{#                                                                    <td>{{ city.city_id }}</td>#}
+                                                                    <td>{{ city.city_name }}</td>
+
+                                                                </tr>
+
+
+                                                                {% endfor %}
+															</tbody>
+					                                    </table>
+                                                      </body>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+        </div>
+    </body>
+        <!-- end page container -->
+{% endblock %}
+</html>

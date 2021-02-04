@@ -1,0 +1,117 @@
+{% extends 'patient_header.html' %}
+{% block content %}
+    {% load static %}
+    <!--breadcrumb area-->
+    <section class="breadcrumb-area dark-overlay" style="background: url({%static 'assets/images/hero.jpg' %}) no-repeat center / cover;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                    <div class="banner-title">
+                        <h2>Registration</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-breadcrumb">
+            <ul>
+                <li><a href="/patient/home/">Home</a></li>
+                <li>Registration</li>
+            </ul>
+        </div>
+    </section><!--/breadcrumb area-->
+
+    <!--Registration Area-->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12">
+                    <div class="account-form">
+                    <div class=" class="form-control input-height">
+                        <div class="section-title centered">
+                            <h2>Create Account</h2>
+                        </div>
+                        <form method="POST" action="/patient/doctor_registration/">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Name" name="doctor_name" required>
+
+{#                            <div class="col-md-5 col-xl-12">#}
+                                    <select name="specialization_id" class="form-control input-height" style="border-radius: 20px">
+                                        {% for specialization in specialization %}
+                                            <option value="{{ specialization.specialization_id }}">{{ specialization.specialization_name }}</option>
+                                        {% endfor %}
+                                    </select>
+{#                            </div>#}
+                        <br>
+
+
+{#                            <input type="text" placeholder="Profile Photo" name="profile_photo">#}
+
+                            <img id="output" height="100">
+<br><br>
+                            <input type="file" name="profile_photo" id="profile_photo" accept="image/*"
+                                                             class="form-control input-height"
+                                                           onchange="loadFile(event)">
+
+                            <input type="text" placeholder="Contact No" name="contact_no" required>
+
+                            <input type="email" placeholder="Email" name="email" required>
+
+                            <input type="password" placeholder="Password" name="password" required>
+
+                            <input type="text" placeholder="Address" name="address" required>
+
+{#                            <input type="text" placeholder="Licence Image" name="licence_image">#}
+
+{#                            <div class="col-md-5">#}
+                                    <select name="city_id" class="form-control input-height" style="border-radius: 20px">
+                                        {% for city in city %}
+                                            <option value="{{ city.city_id }}">{{ city.city_name }}</option>
+                                        {% endfor %}
+                                    </select>
+{#                            </div>#}
+                        <br>
+
+                        <script>
+                                            function loadFile1(event){
+                                                document.getElementById('output1').src= URL.createObjectURL(event.target.files[0]);
+                                            }
+                        </script>
+
+                            <img id="output1" height="100">
+<br><br>
+                            <input type="file" name="licence_image" id="licence_image" accept="image/*"
+                                                             class="form-control input-height"
+                                                           onchange="loadFile1(event)">
+
+                            <input type="text" placeholder="Year of Experience" name="year_of_experience" required>
+
+                            <input type="text" placeholder="Clinic Name" name="clinic_hospital_name" required>
+
+                            <input type="text" placeholder="Description" name="description" required>
+
+                            <input type="hidden" placeholder="Is Active or Not" name="is_active" value="1" required>
+
+                            <input type="text" placeholder="Visiting Charges" name="visiting_charges" required>
+
+
+
+                        <br>
+                        <input type="number" value="0" name="is_admin" id="is_admin" style="display: none">
+                            <button class="bttn-mid btn-fill" type="submit">Create Account</button>
+                        <script>
+                                            function loadFile(event){
+                                                {#alert(event.target.files[0]);#}
+                                                document.getElementById('output').src= URL.createObjectURL(event.target.files[0]);
+                                            }
+                        </script>
+                        </form>
+                        <p>Have you any account in here? <a href="/doctor/doctor_login/">Login</a></p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/Registration Area-->
+
+{% endblock %}

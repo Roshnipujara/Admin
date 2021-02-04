@@ -1,0 +1,174 @@
+{% extends 'doctor_header.html' %}
+{% block content %}
+
+    {% load static %}
+			<!-- start page content -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Edit Doctor Profile</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="/doctor/doctor_home/">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li><a class="parent-item" href="">Doctor</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Edit Doctor Profile</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-box">
+                                <div class="card-head">
+                                    <header>Basic Information</header>
+                                     <button id = "panel-button"
+				                           class = "mdl-button mdl-js-button mdl-button--icon pull-right"
+				                           data-upgraded = ",MaterialButton">
+{#				                           <i class = "material-icons">more_vert</i>#}
+				                        </button>
+				                        <ul class = "mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+				                           data-mdl-for = "panel-button">
+				                           <li class = "mdl-menu__item"><i class="material-icons">assistant_photo</i>Action</li>
+				                           <li class = "mdl-menu__item"><i class="material-icons">print</i>Another action</li>
+				                           <li class = "mdl-menu__item"><i class="material-icons">favorite</i>Something else here</li>
+				                        </ul>
+                                </div>
+                                <div class="card-body" id="bar-parent">
+                                    <form method="POST" action="/doctor/doctor_update/{{ request.session.id }}" id="form_sample_1" class="form-horizontal">
+                                        {% csrf_token %}
+                                        {% for doctor in doctor %}
+                                        <div class="form-body">
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="doctor_name" data-required="1" placeholder="enter name" value="{{ doctor.doctor_name }}" class="form-control input-height" /> </div>
+                                            </div>
+
+                                             <div class="form-group row">
+                                                <label class="control-label col-md-3">Specialization
+                                                    <span class="required"> * </span>
+                                                </label>
+
+                                                <div class="col-md-5">
+                                                     <select name="specialization_id" class="form-control input-height">
+                                                         {% for specialization in specialization %}
+                                                             <option value="{{ specialization.specialization_id }}">{{ specialization.specialization_name }}</option>
+                                                         {% endfor %}
+                                                     </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Contact no
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="contact_no" value="{{ doctor.contact_no }}" placeholder="enter contact no" class="form-control input-heigh" rows="5"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">City
+                                                    <span class="required"> * </span>
+                                                </label>
+
+                                                <div class="col-md-5">
+                                                     <select name="city_id" class="form-control input-height">
+                                                         {% for city in city %}
+                                                             <option value="{{ city.city_id }}">{{ city.city_name }}</option>
+                                                         {% endfor %}
+                                                     </select>
+                                                </div>
+                                            </div>
+
+                                             <div class="form-group row">
+                                                <label class="control-label col-md-3">Email
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="email" name="email" data-required="1" placeholder="enter email id" value="{{ doctor.email }}" class="form-control input-height" /> </div>
+                                            </div>
+
+                                             <div class="form-group row">
+                                                <label class="control-label col-md-3">Password
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="password" name="password" data-required="1" placeholder="enter password" value="{{ doctor.password }}" class="form-control input-height" /> </div>
+                                            </div>
+
+                                             <div class="form-group row">
+                                                <label class="control-label col-md-3">Address
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <textarea name="address" placeholder="enter address" class="form-control input-heigh" rows="5">{{ doctor.address }}</textarea>
+                                            </div>
+                                             </div>
+
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Experience
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="year_of_experience" data-required="1" placeholder="enter year of experience" value ="{{ doctor.year_of_experience }}" class="form-control input-height" /> </div>
+                                            </div>
+
+                                        <div class="form-group row">
+                                                <label class="control-label col-md-3">Hospital Name
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="clinic_hospital_name" data-required="1" placeholder="enter first name" value="{{ doctor.clinic_hospital_name }}" class="form-control input-height" /> </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Description
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="description" data-required="1" placeholder="enter description" value="{{ doctor.description }}" class="form-control input-height" /> </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Is Active
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="is_active" data-required="1" placeholder="enter active or not" value="{{ doctor.is_active }}" class="form-control input-height" /> </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Visiting Charges
+                                                    <span class="required"> * </span>
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="visiting_charges" data-required="1" placeholder="enter charges" value="{{ doctor.visiting_charges }}" class="form-control input-height" /> </div>
+                                            </div>
+
+											<div class="form-actions">
+                                            <div class="row">
+                                                <div class="offset-md-3 col-md-9">
+                                                    <button type="submit" class="btn btn-info">Update</button>
+
+                                                </div>
+                                            	</div>
+                                        	</div>
+										</div>
+                                        {% endfor %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+        </div>
+        <!-- end page container -->
+{% endblock %}

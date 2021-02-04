@@ -1,0 +1,52 @@
+{% extends 'patient_header.html' %}
+{% block content %}
+    {% load static %}
+
+    <!--breadcrumb area-->
+    <section class="breadcrumb-area dark-overlay" style="background: url({% static 'assets/images/hero.jpg' %}) no-repeat center / cover;">
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+
+                    <div class="banner-title">
+                        <h2>About us</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-breadcrumb">
+            <ul>
+                <li><a href="/patient/home/">Home</a></li>
+                <li>About us</li>
+            </ul>
+        </div>
+    </section><!--/breadcrumb area-->
+
+    <!--About Section-->
+    <section class="about-area bg-white">
+        <div class="about-left dark-overlay wow fadeInUp" data-wow-delay="0.4s" style="background-image: url({% static 'assets/images/about-bg.jpg' %}); no-repeat center / cover;">
+            <div class="left-img-wrap">
+{#                <a href="https://www.youtube.com/watch?v=GT6-H4BRyqQ" class="video-popup"><img src="assets/images/play-button.png" alt=""></a>#}
+            </div>
+        </div>
+        <div class="about-content mid-bg-gray wow fadeInUp" data-wow-delay="0.4s">
+            <div class="about-content-inner">
+                <div class="section-title">
+                    <h2>About Our DocTweetUp Community</h2>
+                    <p><b>Today</b> the world is witnessing an onslaught of various health problems like diabetes, heart diseases, kidney diseases and other diseases.
+                        Also factors like pollution, stress, addictions and improper diet and lifestyle puts us at a high risk of developing some or the other health hazards.
+                        It will be very true to say that sound health has become an asset in the current scenario.
+                        In the recent decades, the medical care has improved greatly due to inventions of advanced medical technologies and treatment.</p>
+                </div>
+                <h4>OUR VISION</h4>
+                <p>“ Quality healthcare by compassionate medical professionals, accessible and affordable to all ”</p>
+
+                <h4>OUR MISSION</h4>
+                <p>“ Our mission is to provide the highest level of quality tertiary level of hospital care service to the people  ”</p>
+            </div>
+        </div>
+    </section><!--/About Section-->
+
+
+ {% endblock %}

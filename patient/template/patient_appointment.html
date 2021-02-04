@@ -1,0 +1,77 @@
+{% extends 'patient_header.html' %}
+{% block content %}
+    {% load static %}
+
+    <section class="breadcrumb-area dark-overlay" style="background: url({% static 'assets/images/hero.jpg' %}) no-repeat center / cover;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                    <div class="banner-title">
+                        <h2>Appointments</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-breadcrumb">
+            <ul>
+                <li><a href="/patient/home/">Home</a></li>
+                <li>Appointments</li>
+            </ul>
+        </div>
+    </section><!--/breadcrumb area-->
+
+    <!--Team Area -->
+    <section class="team-area section-padding-2">
+        <div class="container">
+            <div class="row">
+                {% for a in appointment %}
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="single-team">
+{#                        <div class="team-thumb">#}
+{#                            <img src="{% static 'assets/images/team/'%}{{ d.profile_photo}}" alt="">#}
+{#                        </div>#}
+                        <p class="team-title">
+                            <p><strong>Patient : </strong>{{ a.patient_id.patient_name }}</p>
+                            <p><strong>Doctor : </strong>{{ a.doctor_id.doctor_name }}</p>
+                            <p><strong>Appointment Date : </strong>{{ a.appointment_date|date:" d M, Y" }}</p>
+{#                    {{ myDate|date:'Y-m-d H:i' }}#}
+                            <p><strong>Appointment Time : </strong>{{ a.appointment_time }}</p>
+                            <p><strong>Appointment Status : </strong>
+{#                                {{ a.status }} #}
+                                {%  if a.status  == 0 %}
+                                    Accept / Reject
+                                {%   elif a.status  == 1 %}
+                                    Confirm / Not Confirm
+                                {%   elif a.status  == 2 %}
+                                    Reject
+                                {%   elif a.status  == 3 %}
+                                    Confirm
+                                {%   elif a.status  == 4 %}
+                                    Not Confirm
+                                {% endif %}
+                            </p>
+                            <p><strong>Appointment Description : </strong>{{ a.a_description }}</p>
+{#                            <p><strong>Payment Date : </strong>{{ a.payment_date }}</p>#}
+{#                            <p><strong>Amount : </strong>{{ a.amount }}</p>#}
+{#                            <p><strong>Payment Status : </strong>{{ a.payment_status }}</p>#}
+                            <p><strong>Medical Report : </strong>
+                            {% for data in report %}
+                                <p> <a href="{% static 'image/' %}{{data.document }}" target="_blank"> {{data.document}} </a> </p>
+                            {% endfor %}
+                            </p>
+                            <button type="submit" class="bttn-mid btn-fill"><a href="/patient/patient_prescription/{{ a.appointment_id }}" style="color: black">View Prescription</a></button>
+                    <br><br>
+                            <button type="submit" class="bttn-mid btn-fill"><a href="/patient/patient_medical_report/{{ a.appointment_id }}" style="color: black">Upload Medical Report</a></button>
+
+                        </div>
+                        <div class="team-social">
+                        </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            </div>
+        </div>
+    </section><!--/Team Area -->
+
+{% endblock %}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css">
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 5px;
+            background-color: #fff;
+        }
+        .table th,
+        .table td {
+            padding: 5px;
+            vertical-align: top;
+            border-top: 1px solid #000;
+            text-align: center;
+        }
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #000;
+        }
+        .table tbody + tbody {
+            border-top: 2px solid #000;
+        }
+        .table .table {
+            background-color: #fff;
+        }
+        .list-group {
+            display: block;
+            width: 100%;
+            list-style: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .list-group p {
+            width: 100%;
+            height: 20px;
+            line-height: 20px;
+            list-style: none;
+            font-size: 1.1em;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Doctor Report - {{ today | date:"d/m/y"}} </h3>
+    </div>
+
+<table class="table">
+        <caption>
+            <center><h2>Doctor Report</h2></center>
+        </caption>
+
+        <thead>
+            <tr>
+{#                <th>Doctor Id</th>#}
+                <th>Doctor</th>
+                <th>Contact No</th>
+                <th>Email</th>
+                <th>Hospital</th>
+                <th>Address</th>
+                <th>Specialization</th>
+                <th>Year Of Experience</th>
+                <th>Visiting Charge</th>
+            </tr>
+        </thead>
+
+
+
+        <tbody>
+        {% for doctor in doctor %}
+
+            <tr>
+{#                <td>{{ doctor.doctor_id }}</td>#}
+                <td>{{ doctor.doctor_name }}</td>
+                <td>{{ doctor.contact_no }}</td>
+                <td>{{ doctor.email }}</td>
+                <td>{{ doctor.clinic_hospital_name }}</td>
+                <td>{{ doctor.address }}</td>
+                <td>{{ doctor.specialization_id.specialization_name }}</td>
+                <td>{{ doctor.year_of_experience }}</td>
+                <td>{{ doctor.visiting_charges }}</td>
+{#                <td>#}
+{#                    <a href="/edit/{{ products.pid }}">Edit</a>#}
+{#                    <a href="/delete/{{ products.pid }}">Delete</a>#}
+{#                </td>#}
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+
+    </table>
+    </div>
+</div>
+
+</body>
+</html>

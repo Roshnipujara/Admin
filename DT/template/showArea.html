@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="/insert">Insert Data</a>
+
+<table border="1" align="center">
+        <caption>
+            <h2>Area</h2>
+        </caption>
+
+        <thead>
+            <tr>
+                <th>Area Id</th>
+                <th>Area Name</th>
+                <th>City Name</th>
+            </tr>
+        </thead>
+
+
+
+        <tbody>
+        {% for area in area %}
+
+            <tr>
+                <td>{{ area.area_id }}</td>
+                <td>{{ area.area_name }}</td>
+                <td>{{ area.city_id.city_name }}</td>
+                <td>
+                    <a href="/edit/{{ products.pid }}">Edit</a>
+                    <a href="/delete/{{ products.pid }}">Delete</a>
+                </td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+
+    </table>
+
+</body>
+</html>

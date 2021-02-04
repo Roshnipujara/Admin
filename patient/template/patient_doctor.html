@@ -1,0 +1,53 @@
+{% extends 'patient_header.html' %}
+{% block content %}
+    {% load static %}
+
+    <!--breadcrumb area-->
+    <section class="breadcrumb-area dark-overlay" style="background: url({% static 'assets/images/hero.jpg' %}) no-repeat center / cover;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                    <div class="banner-title">
+                        <h2>Doctors</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-breadcrumb">
+            <ul>
+                <li><a href="/patient/home/">Home</a></li>
+                <li>Doctors</li>
+            </ul>
+        </div>
+    </section><!--/breadcrumb area-->
+
+    <!--Team Area -->
+    <section class="team-area section-padding-2">
+        <div class="container">
+            <div class="row">
+                {% for d in doctor %}
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="single-team">
+                        <div class="team-thumb">
+                            <img src="{% static '/image/'%}{{ d.profile_photo}}" alt="">
+                        </div>
+                        <p class="team-title">
+                            <h3>{{ d.doctor_name}}</h3>
+                            <p>{{ d.specialization_id.specialization_name }}</p>
+                            <p>Experience : {{ d.year_of_experience }} years</p>
+                            <p>{{ d.clinic_hospital_name }}</p>
+{#                            <p><a href="/patient/patient_doctordetails/{{ d.doctor_id }}">View Profile</a></p>#}
+                            <p><button type="submit" class="bttn-mid btn-fill"><a href="/patient/patient_doctordetails/{{ d.doctor_id }}"
+                            style="color: black">View Profile</a></button></p>
+                        </div>
+                        <div class="team-social">
+                        </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            </div>
+        </div>
+    </section><!--/Team Area -->
+
+{% endblock %}

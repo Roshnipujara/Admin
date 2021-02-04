@@ -1,0 +1,117 @@
+{% extends 'patient_header.html' %}
+{% block content %}
+    {% load static %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                        <script>
+                        $(document).ready(function() {
+
+                            $("#specialization_id").change(function () {
+                                var url = $("#appointForm").attr("data-doctor-url");
+                                var SId = $(this).val();
+
+                                $.ajax({
+                                    url: url,
+                                    data: {
+                                        'special': SId
+                                    },
+                            success: function (data) {
+                                $("#doctor_id").html(data);  // replace the contents of the city input with the data that came from the server
+                                {#alert(data);#}
+                            }
+                            });
+
+                            });
+                        });
+                       </script>
+
+    <!--breadcrumb area-->
+    <section class="breadcrumb-area dark-overlay" style="background: url({%static 'assets/images/hero.jpg' %}) no-repeat center / cover;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                    <div class="banner-title">
+                        <h2>Get Appointment</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-breadcrumb">
+            <ul>
+                <li><a href="/patient/home">Home</a></li>
+                <li>Appointment</li>
+            </ul>
+        </div>
+    </section><!--/breadcrumb area-->
+
+    <!--appointment Area-->
+    <section class="appointment-area section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-10 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="appointment-content">
+                        <div class="section-title centered">
+                           <h2>Book appointment</h2>
+                        </div>
+                        <form method="POST" id="appointForm" action="/patient/patient_appointment_page/" class="row" data-doctor-url="{% url 'ajax_load_doctors' %}">
+                            {% csrf_token %}
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="appoint-select">
+                                    <select name="specialization_id" id="specialization_id">
+
+                                        <option>
+                                            Select Specialties
+                                        </option>
+                                            {% for s in specialization %}
+                                                <option value="{{ s.specialization_id }}">{{ s.specialization_name }}</option>
+                                            {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="appoint-select">
+                                    <select name="doctor_id" id="doctor_id">
+                                        <option>Select Doctors</option>
+                                            {% for d in doctor %}
+                                                <option value="{{ d.doctor_id }}">{{ d.doctor_name }}</option>
+                                            {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <input type="text" id="datepicker" value="{{appointment.appointment_date}}" name="appointment_date" placeholder="Appointment Date"/>
+                            </div>
+
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <input type="time" value="{{appointment.appointment_time}}" name="appointment_time" placeholder="time"/>
+                            </div>
+
+
+                        {% for p in patient %}
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <input type="hidden" id="patient_id" value="{{p.patient_id}}" name="patient_id" placeholder="Patient Name"/>
+                            </div>
+                        {% endfor %}
+
+
+
+
+
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <input type="text" value="{{appointment.a_description}}" name="a_description" placeholder="Description"/>
+                            </div>
+
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <input type="number" value="0" name="status" id="status" style="display: none"/>
+                                <button type="submit" class="bttn-mid btn-fill">Book Your appointment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/appointment Area-->
+{% endblock %}

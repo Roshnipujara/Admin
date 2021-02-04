@@ -1,0 +1,172 @@
+{% extends 'patient_header.html' %}
+{% block content %}
+    {% load static %}
+    {% now 'Y-m-d' as d %}
+
+    <!--breadcrumb area-->
+    <section class="breadcrumb-area dark-overlay" style="background: url({% static 'assets/images/hero.jpg' %}) no-repeat center / cover;">
+        <div class="container">
+            <div class="row justify-content-center">
+
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                    {% for d in doctor %}
+                    <div class="banner-title">
+                        <h2>Dr. {{ d.doctor_name}}</h2>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="page-breadcrumb">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="doctors.html">Doctors</a></li>
+                <li>Doctors Details</li>
+            </ul>
+        </div>
+    </section><!--/breadcrumb area-->
+
+     <!-- Doctor Area -->
+     <section class="team-area section-padding-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 wow fadeInUp" data-wow-delay="0.4s">
+
+                    <div class="team-details mb-30">
+                        {% for d in doctor %}
+                        <div class="team-thumb-info gray-bg" style="padding: 40px">
+                            <img src="{% static '/image/'%}{{ d.profile_photo}}" alt="" height="150" style="width: auto">
+                            <div class="team-thumb-details">
+
+                                <h4>Dr. {{ d.doctor_name}}</h4>
+                                <br>
+                                <p>{{ d.specialization_id.specialization_name}} Doctor</p>
+{#                                <p>Diam cum eu urna, nunc duis pulvinafusce elit mollisnulla soluta aliquam adipisicing vehicula ac. Turpis ipsum dolor</p>#}
+                                <br>
+
+
+                            </div>
+                        </div>
+                        <div class="team-details-contents gray-bg">
+                            <div class="single-row">
+                                <div class="left">
+                                    <span>Contact no</span>
+                                </div>
+                                <div class="right">
+                                    <p>{{ d.contact_no}}</p>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <div class="left">
+                                    <span>Email</span>
+                                </div>
+                                <div class="right">
+                                    <p>{{ d.email}}</p>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <div class="left">
+                                    <span>Address</span>
+                                </div>
+                                <div class="right">
+                                    <p>{{ d.address}}</p>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <div class="left">
+                                    <span>Licence Image</span>
+                                </div>
+                                <div class="right">
+{#                                    <p>{{ d.licence_image}}</p>#}
+                                    <p><img src="{% static 'assets/images/team/'%}{{ d.licence_image}}" alt="" height="100" width="100"></p>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <div class="left">
+                                    <span>Experience</span>
+                                </div>
+                                <div class="right">
+                                    <p>{{ d.year_of_experience}}</p>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <div class="left">
+                                    <span>Hospital Name</span>
+                                </div>
+                                <div class="right">
+                                    <p>{{ d.clinic_hospital_name}}</p>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <div class="left">
+                                    <span>Description</span>
+                                </div>
+                                <div class="right">
+                                    <p>{{ d.description}}</p>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <div class="left">
+                                    <span>Visiting Charges</span>
+                                </div>
+                                <div class="right">
+                                    <p>{{ d.visiting_charges}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="sidebar-widget sidebar-appointment">
+                        <h4>appointment</h4>
+                        <form method="POST" action="/patient/patient_appointment/{{ doctor.doctor_id }}">
+                    {% csrf_token %}
+                            <div class="appoint-select">
+                                <select name="doctor_id" id="doctor_id">
+                                    {% for d in doctor %}
+                                    <option value="{{ d.doctor_id }}">{{ d.doctor_name }}</option>
+
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            {% for p in patient %}
+                                <input type="hidden" id="patient_id" value="{{p.patient_id}}" name="patient_id" placeholder="Patient Name"/>
+                            {% endfor %}
+                                <input type="text" id="datepicker" value="{{a.appointment_date}}" name="appointment_date" placeholder="Appointment Date"/>
+                                <input type="time" id="timepicker" value="{{a.appointment_time}}" name="appointment_time" placeholder="Appointment Time"/>
+                                <input type="text" value="{{appointment.a_description}}" name="a_description" placeholder="Description"/>
+
+                            <input type="number" value="0" name="status" id="status" style="display: none"/>
+                            <button type="submit" class="bttn-mid btn-fill">Book Your appointment</button>
+                        </form>
+                    </div>
+
+                <div class="sidebar-widget sidebar-appointment">
+                        <h4>FeedBack</h4>
+                        <form method="POST" action="/patient/patient_feedback/{{ doctor.doctor_id }}">
+                            {% csrf_token %}
+                            <input type="text" id="datepicker" value="{{ d }}" name="feedback_date" placeholder="Appointment Date" readonly/>
+                            <input type="text" value="{{ f.description }}" name="description" placeholder="Description"/>
+
+                            <input type="hidden" id="patient_id" value="{{ request.session.pid }}" name="patient_id" placeholder="Patient"/>
+
+
+                            {% for d in doctor %}
+                            <input type="hidden" id="doctor_id" value="{{ d.doctor_id }}" name="doctor_id" placeholder="Doctor"/>
+                            {% endfor %}
+
+                            <button type="submit" class="bttn-mid btn-fill">Give Your FeedBack</button>
+                        </form>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </section><!-- /Doctor Area -->
+
+
+{% endblock %}

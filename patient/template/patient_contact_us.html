@@ -1,0 +1,92 @@
+{% extends 'patient_header.html' %}
+{% block content %}
+    {% load static %}
+{#    {% import datetime %}#}
+{#    {% d = datetime.datetime.now() %}#}
+    {% now 'Y-m-d' as d %}
+
+    <!--breadcrumb area-->
+    <section class="breadcrumb-area dark-overlay" style="background: url({% static 'assets/images/hero.jpg' %}) no-repeat center / cover;">
+
+            <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                    <div class="banner-title">
+                        <h2>Contact us</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-breadcrumb">
+            <ul>
+                <li><a href="/patient/home/">Home</a></li>
+                <li>Contact</li>
+            </ul>
+        </div>
+    </section><!--/breadcrumb area-->
+
+    <!--Contact Area-->
+    <section class="section-padding-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                  <div class="contact-form">
+                        <div class="section-title cenntred">
+                            <h2>Send Messages</h2>
+                        </div>
+                        <form method="POST" action="/patient/patient_contact_us/">
+                            {% csrf_token %}
+                            <input type="text" value="{{ contact_us.fname }}" name="fname" placeholder="First Name">
+                            <input type="text" value="{{ contact_us.lname }}" name="lname" placeholder="Last Name">
+                            <input type="text" value="{{ contact_us.contact_no }}" name="contact_no" placeholder="Conatct No">
+                            <input type="email" value="{{ contact_us.email }}" name="email" placeholder="Email">
+                            <input type="hidden" value="{{ d }}" name="up_date" placeholder="Uploaded Date" readonly>
+                            <textarea rows="5" value="{{ contact_us.message }}" name="message" placeholder="Write Messages"></textarea>
+                            <button type="submit" class="bttn-mid btn-fill">Send Messages</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="row contact-details">
+
+                        <div class="col-6">
+                            <div class="single-contact-address">
+                                <h3>Phone Number</h3>
+                                <p>+91-7778028057 <br> +91-7575011504</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="single-contact-address">
+                                <h3>Email Address</h3>
+                                <p>rds998198@gmail.com <br><br></p>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="single-contact-address">
+                                <h3>Office Address</h3>
+                                <p>Near Tapovan Circle Visat, Sarkhej - Gandhinagar Hwy, Chandkheda, Ahmedabad, Gujarat 382424</p>
+                            </div>
+                        </div>
+{#                        <div class="col-6">#}
+{#                            <div class="single-contact-address">#}
+{#                                <h3>Fax Number</h3>#}
+{#                                <p>4920 Northwest 2 Avenue Medford, MN 55049 kigkong,USA</p>#}
+{#                            </div>#}
+{#                        </div>#}
+                        <div class="col-12">
+                            <div class="single-contact-address">
+                                <h2>Helpline : <span>075739 49408</span></h2>
+{#                                <form action="#">#}
+{#                                    <input type="email" placeholder="Enter Phone Number" required>#}
+{#                                    <button type="submit">Free Call Back</button>#}
+{#                                </form>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/Contact Area-->
+
+{#    <div id="map"></div>#}
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'patient_header.html' %}
+{% block content %}
+    {% load staticfiles %}
+    <!--breadcrumb area-->
+    <section class="breadcrumb-area dark-overlay" style="background: url({%static 'assets/images/hero.jpg' %}) no-repeat center / cover;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                    <div class="banner-title">
+                        <h2>Profile</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-breadcrumb">
+            <ul>
+                <li><a href="/patient/home/">Home</a></li>
+                <li>Edit Profile</li>
+            </ul>
+        </div>
+    </section><!--/breadcrumb area-->
+
+    <!--Registration Area-->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12">
+                    <div class="account-form">
+                        <div class="section-title centered">
+                            <h2>Edit Profile</h2>
+                        </div>
+                        <form method="POST" action="/patient/patient_update/{{ patient.patient_id }}">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Name" name="patient_name" value="{{ patient.patient_name }}">
+
+                            <input type="text" placeholder="Address" name="address" value="{{ patient.address }}">
+
+                            <div class="col-md-5">
+                            <select name="gender" class="form-control input-height">
+                                <option  value="male">Male</option>
+                                <option  value="female">Female</option>
+                            </select>
+                            </div>
+                        <br>
+
+                            <input type="text" placeholder="Phone Number" name="contact_no" value="{{ patient.contact_no }}">
+
+                            <input type="email" placeholder="Email" name="email" value="{{ patient.email }}">
+
+                            <input type="password" placeholder="Password" name="password" value="{{ patient.password }}">
+{#                            <div class="form-group row">#}
+{#                                <label class="control-label col-md-3">Area#}
+{#                                    <span class="required"> * </span>#}
+{#                                </label>#}
+
+                                <div class="col-md-5">
+                                    <select name="area_id" class="form-control input-height">
+                                        {% for a in area %}
+                                            <option value="{{ a.area_id }}">{{ a.area_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+{#                            </div>#}
+                        <br>
+
+                            <input type="number" value="0" name="is_admin" id="is_admin" style="display: none" value="{{ patient.is_admin }}">
+
+                        <button type="submit" class="bttn-mid btn-fill">Update</button>
+
+                        </form>
+{#                        <p>Have you any account in here? <a href="/patient/patient_login/">Login</a></p>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/Registration Area-->
+
+{% endblock %}

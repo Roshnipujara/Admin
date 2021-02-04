@@ -1,0 +1,47 @@
+{% extends 'patient_header.html' %}
+{% block content %}
+    {% load static %}
+
+    {% now 'Y-m-d' as d %}
+
+    <!--breadcrumb area-->
+    <section class="breadcrumb-area dark-overlay" style="background: url({% static 'assets/images/hero.jpg'%}) no-repeat center / cover;">
+        <div class="page-breadcrumb">
+            <ul>
+                <li><a href="/patient/home/">Home</a></li>
+                <li><a href="/patient/patient_allappointment/">Appointment</a></li>
+                <li>Upload Medical Report</li>
+            </ul>
+        </div>
+    </section><!--/breadcrumb area-->
+
+     <!-- Doctor Area -->
+     <section class="team-area section-padding-2">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="sidebar-widget sidebar-appointment">
+                        <h4>Medical Report</h4>
+                        {% for a in appointment %}
+                        <form method="POST" action="/patient/patient_medical_report/{{ a.appointment_id }}" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+
+                            <input type="hidden" name="appointment_id" value="{{ a.appointment_id }}"  readonly/>
+
+                            <input type="text" value="{{ d }}" name="up_date" placeholder="Upload Date" readonly/>
+
+                            <input type="file" class="form-control input-height" name="document" onchange="loadfile(event)"/>
+
+                            <button type="submit" class="bttn-mid btn-fill">Upload</button>
+                        </form>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+    </section><!-- /Doctor Area -->
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'patient_header.html' %}
+{% block content %}
+    {% load static %}
+    <!--breadcrumb area-->
+    <section class="breadcrumb-area dark-overlay" style="background: url({% static 'assets/images/hero.jpg' %}) no-repeat center / cover;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                    <div class="banner-title">
+                        <h2>Login</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-breadcrumb">
+            <ul>
+                <li><a href="/patient/home/">Home</a></li>
+                <li>Login</li>
+            </ul>
+        </div>
+    </section><!--/breadcrumb area-->
+
+    <!--Form Area-->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="account-form">
+                        <div class="section-title centered">
+                            <h2>Login Account</h2>
+                        </div>
+
+                        <form method="POST" action="/patient/patient_login/">
+                            {% csrf_token %}
+                            <input type="email" name="uname" placeholder="Email" required>
+                            <input type="password" name="pwd" placeholder="Password" required>
+
+                             <span style="color:red">
+                                {% for data in messages %}
+                                    <p>{{ data }}</p><br>
+                                {% endfor %}
+                            </span>
+
+                            <button class="bttn-mid btn-fill" type="submit">Login Account</button>
+                        </form>
+                        <p>Don't you have any account yet? <a href="/patient/patient_registration/">Signup</a></p>
+                        <p>Forgot Password ? <a href="/patient/patient_forgot_password/">Forgot Password</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/Form Area-->
+
+{% endblock %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="/insert">Insert Data</a>
+
+<table border="1" align="center">
+        <caption>
+            <h2>Patients</h2>
+        </caption>
+
+        <thead>
+            <tr>
+                <th>Patient Id</th>
+                <th>Patient Name</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>Contact No</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Is Admin</th>
+                <th>OTP</th>
+                <th>OTP Used</th>
+                <th>Area</th>
+            </tr>
+        </thead>
+
+
+
+        <tbody>
+        {% for patient in patient %}
+
+            <tr>
+                <td>{{ patient.patient_id }}</td>
+                <td>{{ patient.patient_name }}</td>
+                <td>{{ patient.address }}</td>
+                <td>{{ patient.gender }}</td>
+                <td>{{ patient.contact_no }}</td>
+                <td>{{ patient.email }}</td>
+                <td>{{ patient.password }}</td>
+                <td>{{ patient.is_admin }}</td>
+                <td>{{ patient.otp }}</td>
+                <td>{{ patient.otp_used }}</td>
+                <td>{{ patient.area_id.area_name }}</td>
+                <td>
+                    <a href="/edit/{{ products.pid }}">Edit</a>
+                    <a href="/delete/{{ products.pid }}">Delete</a>
+                </td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+
+    </table>
+
+</body>
+</html>
