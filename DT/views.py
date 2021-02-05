@@ -143,10 +143,11 @@ def logout(request):
         del request.session['username']
     except:
         pass
+    #if request.POST.get("remember"):
     if request.COOKIES.get("cemail"):
         print("---------------", request.COOKIES.get('cemail'))
         return render(request, "login.html",
-                      {'cookie1': request.COOKIES['cemail'], 'cookie2': request.COOKIES['cpass']})
+                       {'cookie1': request.COOKIES['cemail'], 'cookie2': request.COOKIES['cpass']})
     return redirect("/login/")
 
 
@@ -165,11 +166,13 @@ def login(request):
             request.session['id'] = n
 
             if request.POST.get("remember"):
-                response = HttpResponse()
+
+                response =redirect('/home/')
                 response.set_cookie('cemail', request.POST["uname"])
                 response.set_cookie('cpass', request.POST["pwd"])
-                return HttpResponseRedirect("/home/")
+                return response
             return redirect("/home/")
+
         else:
             messages.error(request, 'username or password not correct')
             return render(request, "login.html")

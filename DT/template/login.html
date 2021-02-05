@@ -40,7 +40,7 @@
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="pwd" placeholder="Password" required>
+						<input class="input100" type="password" name="pwd" placeholder="Password" value="{{cookie2}}" required>
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
@@ -66,6 +66,21 @@
 							Forgot Password?
 						</a>
 					</div>
+					<div class="text-center mt-4 mb-3">
+                  <div class="text-job text-muted">Login With Social</div>
+                </div>
+                <div class="row sm-gutters">
+                  <div class="col-6">
+                    <a class="btn btn-block btn-social btn-facebook" href="{% url "social:begin" "facebook" %}">
+                      <span class="fab fa-facebook"></span> Facebook
+                    </a>
+                  </div>
+                  <div class="col-6">
+                    <a class="btn btn-block btn-social btn-google" href="{% url "social:begin" "google-oauth2" %}">
+                      <span class="fab fa-google"></span> Google
+                    </a>
+                  </div>
+                </div>
 				</form>
 			</div>
 		</div>
