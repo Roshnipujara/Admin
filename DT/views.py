@@ -155,6 +155,7 @@ def logout(request):
 
 def login(request):
 
+
     if request.method == "POST":
         name = request.POST['uname']
         newpassword = request.POST['pwd']
@@ -169,8 +170,9 @@ def login(request):
 
             if request.POST.get("remember"):
                 response =redirect('/home/')
-                response.set_cookie('cemail', request.POST["uname"])
-                response.set_cookie('cpass', request.POST["pwd"])
+                #cookie_max_age = settings.TWO_FACTOR_REMEMBER_USER_SECONDS
+                response.set_cookie('cemail', request.POST["uname"],3600 * 24 * 365 * 2)
+                response.set_cookie('cpass', request.POST["pwd"],3600 * 24 * 365 * 2)
                 return response
             return redirect("/home/")
 
@@ -178,8 +180,12 @@ def login(request):
             messages.error(request, 'Username or Password are invalid')
             return render(request, "login.html")
     else:
-        return render(request, "login.html")
-
+        if request.COOKIES.get("cemail"):
+            print("---------------", request.COOKIES.get('cemail'))
+            return render(request, "login.html",
+                          {'cookie1': request.COOKIES['cemail'], 'cookie2': request.COOKIES['cpass']})
+        else:
+            return render(request,"login.html")
 
 def city(request):
     city = City.objects.all()
