@@ -23,6 +23,7 @@ urlpatterns = [
     # CLIENT SIDE
     path('patient/', include('patient.urls')),
     path('doctor/', include('doctor.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
 
     path('patient_render/pdf/', views.patient_Pdf.as_view()),
     path('doctor_render/pdf/', views.doctor_Pdf.as_view()),

@@ -117,7 +117,7 @@ def patient_registration(request):
             try:
                 print("------------- Before save data ------------")
                 newform = form.save(commit=False)
-                newform.password = hashlib.md5(newform.password.encode('utf')).hexdigest()
+                #newform.password = hashlib.md5(newform.password.encode('utf')).hexdigest()
                 # print("@@@@@@",newform.password)
                 newform.save()
                 print("++++++save data +++++++++++")

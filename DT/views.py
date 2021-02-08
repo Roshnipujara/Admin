@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.db.models import Count
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 
 from DT.functions import handle_uploaded_file
 from DT.models import Patient, City, Area, Doctor, Available_time, Appointment, Specialization, Gallery, Feedback, \
@@ -34,6 +35,8 @@ def sendemail(request):
         recipient_list = [e, ]
         send_mail(subject, message, email_from, recipient_list)
         return render(request, 'set_password.html')
+    else:
+        return render(request,"forgot_password.html")
 
 
 def set_password(request):
@@ -46,7 +49,7 @@ def set_password(request):
         val = Patient.objects.filter(email=e, is_admin=1,otp=totp).count()
 
         if val == 1:
-            tpassword = hashlib.md5(tpassword.encode('utf')).hexdigest()
+            #tpassword = hashlib.md5(tpassword.encode('utf')).hexdigest()
             val = Patient.objects.filter(email=e, is_admin=1).update(otp_used=1,password=tpassword)
             return render(request, "login.html")
         else:
@@ -142,7 +145,12 @@ def logout(request):
         del request.session['username']
     except:
         pass
-    return render(request, "login.html")
+    #if request.POST.get("remember"):
+    if request.COOKIES.get("cemail"):
+        print("---------------", request.COOKIES.get('cemail'))
+        return render(request, "login.html",
+                       {'cookie1': request.COOKIES['cemail'], 'cookie2': request.COOKIES['cpass']})
+    return redirect("/login/")
 
 
 def login(request):
@@ -158,9 +166,16 @@ def login(request):
                 n = item.patient_id
             request.session['username'] = name
             request.session['id'] = n
-            return render(request, "home.html")
+
+            if request.POST.get("remember"):
+                response =redirect('/home/')
+                response.set_cookie('cemail', request.POST["uname"])
+                response.set_cookie('cpass', request.POST["pwd"])
+                return response
+            return redirect("/home/")
+
         else:
-            messages.error(request, 'username or password not correct')
+            messages.error(request, 'Username or Password are invalid')
             return render(request, "login.html")
     else:
         return render(request, "login.html")
