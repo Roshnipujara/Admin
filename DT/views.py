@@ -35,6 +35,8 @@ def sendemail(request):
         recipient_list = [e, ]
         send_mail(subject, message, email_from, recipient_list)
         return render(request, 'set_password.html')
+    else:
+        return render(request,"forgot_password.html")
 
 
 def set_password(request):
@@ -47,7 +49,7 @@ def set_password(request):
         val = Patient.objects.filter(email=e, is_admin=1,otp=totp).count()
 
         if val == 1:
-            tpassword = hashlib.md5(tpassword.encode('utf')).hexdigest()
+            #tpassword = hashlib.md5(tpassword.encode('utf')).hexdigest()
             val = Patient.objects.filter(email=e, is_admin=1).update(otp_used=1,password=tpassword)
             return render(request, "login.html")
         else:
@@ -166,7 +168,6 @@ def login(request):
             request.session['id'] = n
 
             if request.POST.get("remember"):
-
                 response =redirect('/home/')
                 response.set_cookie('cemail', request.POST["uname"])
                 response.set_cookie('cpass', request.POST["pwd"])
@@ -174,7 +175,7 @@ def login(request):
             return redirect("/home/")
 
         else:
-            messages.error(request, 'username or password not correct')
+            messages.error(request, 'Username or Password are invalid')
             return render(request, "login.html")
     else:
         return render(request, "login.html")
