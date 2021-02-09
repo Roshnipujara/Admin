@@ -41,8 +41,8 @@ urlpatterns = [
     path('patient/', views.patient),
     path('AllPatient/', views.showPatient),
 
-    path('admin_edit/<int:patient_id>', views.admin_edit),
-    path('admin_update/<int:patient_id>', views.admin_update),
+    path('admin_edit/', views.admin_edit),
+    path('admin_update/', views.admin_update),
 
     path('city/', views.city),
     path('area/', views.area),

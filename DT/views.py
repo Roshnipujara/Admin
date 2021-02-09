@@ -122,22 +122,32 @@ def showPatient(request):
     return render(request, "showPatient.html")
 
 
-def admin_edit(request,patient_id):
-    patient = Patient.objects.all().get(patient_id=patient_id , is_admin=1)
-    area = Area.objects.all()
+def admin_edit(request):
+    pid=request.session['id']
+    p= Patient.objects.get(patient_id=pid,is_admin=1)
+    a = Area.objects.all()
     if request.session.has_key('username'):
-        return render(request, "admin_update.html", {'patient': patient,'area':area})
+        return render(request, "admin_update.html", {'patient': p,'area':a})
     else:
         return render(request, "home.html")
 
 
-def admin_update(request, patient_id):
-    patient = Patient.objects.get(patient_id=patient_id)
+def admin_update(request):
+    pid = request.session['id']
+    patient = Patient.objects.get(patient_id=pid)
+    a=Area.objects.all()
     form = PatientForm(request.POST, instance=patient)
+    print("---------------",form.errors)
     if form.is_valid():
-        form.save()
-        return redirect("/patient")
-    return render(request, 'admin_update.html', {'patient': patient})
+        try:
+            form.save()
+            return redirect("/patient")
+        except:
+            print("------------", sys.exc_info())
+    else:
+        pass
+
+    return render(request, 'admin_update.html', {'patient': patient,'area':a})
 
 
 def logout(request):

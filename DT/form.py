@@ -28,7 +28,7 @@ class AreaForm(forms.ModelForm):
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ['patient_name', 'address', 'gender', 'contact_no', 'email', 'password', 'area_id','is_admin']
+        fields = ['patient_name', 'address', 'gender', 'contact_no', 'email', 'password', 'area_id']
 
 
 class GalleryForm(forms.ModelForm):
