@@ -37,7 +37,7 @@
 				                        </ul>
                                 </div>
                                 <div class="card-body" id="bar-parent">
-                                    <form method="POST" action="/admin_update/{{ patient.patient_id }}" id="form_sample_1" class="form-horizontal">
+                                    <form method="POST" action="/admin_update/" id="form_sample_1" class="form-horizontal">
                                         {% csrf_token %}
                                         <div class="form-body">
                                             <div class="form-group row">
@@ -65,7 +65,7 @@
                                                 <div class="col-md-5">
                                                      <select name="area_id" class="form-control input-height">
                                                          {% for a in area %}
-                                                             <option value="{{ a.area_id }}">{{ a.area_name }}</option>
+                                                             <option value="{{a.area_id}}">{{a.area_name}}</option>
                                                          {% endfor %}
                                                      </select>
                                                 </div>
