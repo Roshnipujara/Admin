@@ -1,4 +1,5 @@
-{% extends 'header.html' %}
+{% include 'header.html' %}
+
 {% block content %}
 
     {% load static %}
@@ -7,64 +8,178 @@
                 <div class="page-content">
                     <div class="page-bar">
                     </div>
-                    <img src="{% static 'image/home2.jpg' %}" height="550" width="1080">
-                    <br><br>
-					<!-- start widget -->
-					<div class="state-overview">
-						<div class="row">
-					        <div class="col-xl-3 col-md-6 col-12">
-					          <div class="info-box bg-white">
-					            <span class="info-box-icon push-center bg-primary"><i class="material-icons">group</i></span>
-					            <div class="info-box-content">
-                                    <span class="info-box-text">Specialization</span>
-					              <span class="info-box-number">{{ sc }}</span>
-					            </div>
-					            <!-- /.info-box-content -->
-					          </div>
-					          <!-- /.info-box -->
-					        </div>
-					        <!-- /.col -->
-					        <div class="col-xl-3 col-md-6 col-12">
-					          <div class="info-box bg-white">
-					            <span class="info-box-icon push-center bg-warning"><i class="material-icons">group</i></span>
-					            <div class="info-box-content">
-					              <span class="info-box-text">Doctor</span>
-					              <span class="info-box-number">{{ dc }}</span>
-					            </div>
-					            <!-- /.info-box-content -->
-					          </div>
-					          <!-- /.info-box -->
-					        </div>
-					        <!-- /.col -->
-					        <div class="col-xl-3 col-md-6 col-12">
-					          <div class="info-box bg-white">
-					            <span class="info-box-icon push-center bg-success"><i class="material-icons">group</i></span>
-					            <div class="info-box-content">
-					              <span class="info-box-text">Patient</span>
-					              <span class="info-box-number">{{ pc }}</span>
-					            </div>
-					            <!-- /.info-box-content -->
-					          </div>
-					          <!-- /.info-box -->
-					        </div>
-					        <!-- /.col -->
-					        <div class="col-xl-3 col-md-6 col-12">
-					          <div class="info-box bg-white">
-					            <span class="info-box-icon push-center bg-info"><i class="material-icons">insert_invitation</i></span>
-					            <div class="info-box-content">
-					              <span class="info-box-text">Appointment</span>
-					              <span class="info-box-number">{{ ac }}</span>
-					            </div>
-					            <!-- /.info-box-content -->
-					          </div>
-					          <!-- /.info-box -->
-					        </div>
-					        <!-- /.col -->
-					      </div>
+
+
+
+					{% include 'base.html' %}
+
+							<script>
+								{% block jquery %}
+
+								var endpoint = '/api/chart/data/'
+								var defaultData = []
+								var labels = [];
+								$.ajax({
+									method: "GET",
+									url: endpoint,
+									success: function(data) {
+										labels = data.labels
+										defaultData = data.default
+										setChart()
+									},
+									error: function(error_data) {
+										console.log("error")
+										console.log(error_data)
+									}
+								})
+
+								function setChart() {
+									var ctx = document.getElementById("myChart");
+									var ctx2 = document.getElementById("myChart2");
+									var myChart = new Chart(ctx2, {
+										type: 'bar',
+										data: {
+											labels: labels,
+											datasets: [{
+												label: 'Total Appointment',
+												data: defaultData,
+												backgroundColor: [
+													'rgba(255, 99, 132, 0.2)',
+													'rgba(54, 162, 235, 0.2)',
+													'rgba(255, 206, 86, 0.2)',
+													'rgba(75, 192, 192, 0.2)',
+													'rgba(153, 102, 255, 0.2)',
+													'rgba(255, 159, 64, 0.2)'
+												],
+												borderColor: [
+													'rgba(255,99,132,1)',
+													'rgba(54, 162, 235, 1)',
+													'rgba(255, 206, 86, 1)',
+													'rgba(75, 192, 192, 1)',
+													'rgba(153, 102, 255, 1)',
+													'rgba(255, 159, 64, 1)'
+												],
+												borderWidth: 1
+											}]
+										},
+										options: {
+											scales: {
+												yAxes: [{
+													ticks: {
+														beginAtZero: true
+													}
+												}]
+											}
+										}
+									});
+
+									var myChart = new Chart(ctx, {
+										type: 'polarArea',
+										data: {
+											labels: labels,
+											datasets: [{
+												label: '# of Votes',
+												data: defaultData,
+												backgroundColor: [
+													'rgba(255, 99, 132, 0.2)',
+													'rgba(54, 162, 235, 0.2)',
+													'rgba(255, 206, 86, 0.2)',
+													'rgba(75, 192, 192, 0.2)',
+													'rgba(153, 102, 255, 0.2)',
+													'rgba(255, 159, 64, 0.2)'
+												],
+												borderColor: [
+													'rgba(255,99,132,1)',
+													'rgba(54, 162, 235, 1)',
+													'rgba(255, 206, 86, 1)',
+													'rgba(75, 192, 192, 1)',
+													'rgba(153, 102, 255, 1)',
+													'rgba(255, 159, 64, 1)'
+												],
+												borderWidth: 1
+											}]
+										},
+										options: {
+											scales: {
+												yAxes: [{
+													ticks: {
+														beginAtZero: true
+													}
+												}]
+											}
+										}
+									});
+								}
+								// var ctx = document.getElementById("myChart");
+
+
+
+								{% endblock %}
+							</script>
+						<!-- start widget -->
+					 <img src="{% static 'image/home2.jpg' %}" height="550" width="1080">
+					<br><br>
+					<br><br>
+						<div class="state-overview">
+							<div class="row">
+						        <div class="col-xl-3 col-md-6 col-12">
+						          <div class="info-box bg-white">
+						            <span class="info-box-icon push-center bg-primary"><i class="material-icons">group</i></span>
+					    	        <div class="info-box-content">
+										<a href="/specialization/">
+                                	    <span class="info-box-text">Specialization</span>
+						              <span class="info-box-number">{{ sc }}</span>
+										</a>
+									</div>
+						            <!-- /.info-box-content -->
+						          </div>
+						          <!-- /.info-box -->
+					    	    </div>
+					        	<!-- /.col -->
+						        <div class="col-xl-3 col-md-6 col-12">
+						          <div class="info-box bg-white">
+						            <span class="info-box-icon push-center bg-warning"><i class="material-icons">group</i></span>
+						            <div class="info-box-content">
+										<a href="/doctor/">
+						              <span class="info-box-text">Doctor</span>
+					    	          <span class="info-box-number">{{ dc }}</span>
+					        	    	</a>
+									</div>
+						            <!-- /.info-box-content -->
+						          </div>
+						          <!-- /.info-box -->
+						        </div>
+						        <!-- /.col -->
+						        <div class="col-xl-3 col-md-6 col-12">
+					    	      <div class="info-box bg-white">
+					        	    <span class="info-box-icon push-center bg-success"><i class="material-icons">group</i></span>
+					            	<div class="info-box-content">
+										<a href="/patient/">
+					            	  <span class="info-box-text">Patient</span>
+						              <span class="info-box-number">{{ pc }}</span>
+										</a>
+					    	        </div>
+					        	    <!-- /.info-box-content -->
+					         	 </div>
+						          <!-- /.info-box -->
+						        </div>
+						        <!-- /.col -->
+						        <div class="col-xl-3 col-md-6 col-12">
+					    	      <div class="info-box bg-white">
+					        	    <span class="info-box-icon push-center bg-info"><i class="material-icons">insert_invitation</i></span>
+						            <div class="info-box-content">
+										<a href="/appointment/">
+						              <span class="info-box-text">Appointment</span>
+						              <span class="info-box-number">{{ ac }}</span>
+										</a>
+									</div>
+									  					            <!-- /.info-box-content -->
+					        	  </div>
+										   <!-- /.info-box -->
+						        </div>
+								  <!-- /.col -->
+						      </div>
+									</div>
+                    	    </div>
 						</div>
-                        </div>
-					</div>
-                </div>
-            </div>
-            <!-- end page content -->
 {% endblock %}

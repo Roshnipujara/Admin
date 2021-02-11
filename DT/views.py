@@ -4,9 +4,12 @@ import sys
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
+from django.db import connection
 from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from DT.functions import handle_uploaded_file
 from DT.models import Patient, City, Area, Doctor, Available_time, Appointment, Specialization, Gallery, Feedback, \
@@ -516,8 +519,30 @@ def gallery_del(request, image_id):
     gallery.delete()
     return redirect("/gallery")
 
+class HomeView(View):
+    def get(self,request,*args,**kwargs):
+        return render(request,"doctorChart.html")
 
 
+class DoctorChart(APIView):
+    authentication_classes = []
+    permission_classes = []
 
+    def get(self,request,format=None):
+        cursor=connection.cursor()
+        cursor.execute('''select (SELECT doctor_name from doctor where doctor_id = a.doctor_id_id) as name , count(appointment_id) from appointment a GROUP by doctor_id_id''')
+        qs=cursor.fetchall()
+        print("+++++++++++=",)
+        labels=[]
+        default_items=[]
+        for item in qs:
+            labels.append(item[0])
+            default_items.append(item[1])
+
+        data = {
+            "labels":labels,
+            "default":default_items,
+        }
+        return Response(data)
 
 
