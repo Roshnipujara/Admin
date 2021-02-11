@@ -13,13 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
 from django.contrib import admin
+# noinspection PyProtectedMember
 from django.urls import path
 from DT import views
 from django.urls import include
 
-urlpatterns = [
+from DT.views import HomeView,DoctorChart
 
+urlpatterns = [
+    # path('charthome/',HomeView.as_view(), name="home"),
+    # path(r'^api/chart/data/$', DoctorChart.as_view(),name='api-data' ),
     # CLIENT SIDE
     path('patient/', include('patient.urls')),
     path('doctor/', include('doctor.urls')),
@@ -85,5 +90,7 @@ urlpatterns = [
     # path('patient_del/<int:patient_id>', views.patient_del),
 
     # path('patient/', include('patient.urls')),
+    url(r'doctorhome', HomeView.as_view(), name='home'),
+    url(r'^api/chart/data/$', DoctorChart.as_view(),name="api-data"),
 
 ]

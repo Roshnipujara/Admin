@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <!-- BEGIN HEAD -->
 
 <!-- Mirrored from radixtouch.in/templates/admin/sunray/source/light/tableData.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 24 Sep 2019 05:55:48 GMT -->
@@ -41,7 +41,8 @@
 
 	<!-- favicon -->
     <link rel="shortcut icon" href="{% static 'http://radixtouch.in/templates/admin/sunray/source/assets/img/favicon.ico' %}" />
- </head>
+
+</head>
 <!-- END HEAD -->
 <body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white dark-color logo-dark">
 <!-- start header -->
@@ -51,7 +52,7 @@
 		<div class="page-logo">
 			<a href="/home/">
 				{#                    <img alt="" src="{% statics 'assets/img/logo.png' %}">#}
-				<span class="logo-default" >DocTweetUp</span> </a>
+				<span class="logo-default" >Knock-Doc</span> </a>
 		</div>
 		<!-- logo end -->
 		<ul class="nav navbar-nav navbar-left in">
@@ -72,6 +73,7 @@
 							<li>
 								<a href="patient_registration.html" class="patient-icon">
 									<i class="material-icons">local_hotel</i>
+									<a href="patient/patient_registration/"></a>
 									<span class="block">Add Patient</span>
 								</a>
 							</li>
@@ -296,20 +298,20 @@
 		</div>
 	</div>
 </div>		 <!-- end sidebar menu -->
-
+</div>
 {% block content %}
 {% endblock %}
 
 <footer>
 	<!-- start footer -->
-	<div class="page-footer">
-		<div class="page-footer-inner"> 2019 &copy; DocTweetUp
-			<a href="mailto:redstartheme@gmail.com" target="_top" class="makerCss"></a>
-		</div>
-		<div class="scroll-to-top">
-			<i class="material-icons">eject</i>
-		</div>
-	</div>
+<!--	<div class="page-footer">-->
+<!--		<div class="page-footer-inner"> 2019 &copy; DocTweetUp-->
+<!--			<a href="mailto:redstartheme@gmail.com" target="_top" class="makerCss"></a>-->
+<!--		</div>-->
+<!--		<div class="scroll-to-top">-->
+<!--			<i class="material-icons">eject</i>-->
+<!--		</div>-->
+<!--	</div>-->
 	<!-- end footer -->
 	<!-- start js include path -->
     <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}" ></script>
@@ -331,6 +333,7 @@
     <!-- end js include path -->
 
 	</footer>
+
 </body>
 
 <!-- Mirrored from radixtouch.in/templates/admin/sunray/source/light/tableData.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 24 Sep 2019 05:55:48 GMT -->
