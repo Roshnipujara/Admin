@@ -114,7 +114,13 @@ class appointment_Pdf(View):
 
 
 def home(request):
-    return render(request, "home.html")
+    s=Specialization.objects.all().count()
+    d=Doctor.objects.all().count()
+    p=Patient.objects.all().count()
+    a=Appointment.objects.all().count()
+    app=Appointment.objects.filter(status=0)
+
+    return render(request, "home.html",{"special":s,"doctor":d,"patient":p,"appointment":a,"a":app})
 
 
 def city(request):

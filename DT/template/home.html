@@ -8,9 +8,66 @@
                 <div class="page-content">
                     <div class="page-bar">
                     </div>
-
-
-
+					<div class="state-overview">
+							<div class="row">
+						        <div class="col-xl-3 col-md-6 col-12">
+						          <div class="info-box bg-white">
+						            <span class="info-box-icon push-center bg-primary"><i class="material-icons">group</i></span>
+					    	        <div class="info-box-content">
+										<a href="/specialization/">
+                                	    <span class="info-box-text">Specialization</span>
+						              <span class="info-box-number">{{special}}</span>
+										</a>
+									</div>
+						            <!-- /.info-box-content -->
+						          </div>
+						          <!-- /.info-box -->
+					    	    </div>
+					        	<!-- /.col -->
+						        <div class="col-xl-3 col-md-6 col-12">
+						          <div class="info-box bg-white">
+						            <span class="info-box-icon push-center bg-warning"><i class="material-icons">group</i></span>
+						            <div class="info-box-content">
+										<a href="/doctor/">
+						              <span class="info-box-text">Doctor</span>
+					    	          <span class="info-box-number">{{doctor}}</span>
+					        	    	</a>
+									</div>
+						            <!-- /.info-box-content -->
+						          </div>
+						          <!-- /.info-box -->
+						        </div>
+						        <!-- /.col -->
+						        <div class="col-xl-3 col-md-6 col-12">
+					    	      <div class="info-box bg-white">
+					        	    <span class="info-box-icon push-center bg-success"><i class="material-icons">group</i></span>
+					            	<div class="info-box-content">
+										<a href="/patient/">
+					            	  <span class="info-box-text">Patient</span>
+						              <span class="info-box-number">{{patient}}</span>
+										</a>
+					    	        </div>
+					        	    <!-- /.info-box-content -->
+					         	 </div>
+						          <!-- /.info-box -->
+						        </div>
+						        <!-- /.col -->
+						        <div class="col-xl-3 col-md-6 col-12">
+					    	      <div class="info-box bg-white">
+					        	    <span class="info-box-icon push-center bg-info"><i class="material-icons">insert_invitation</i></span>
+						            <div class="info-box-content">
+										<a href="/appointment/">
+						              <span class="info-box-text">Appointment</span>
+						              <span class="info-box-number">{{appointment}}</span>
+										</a>
+									</div>
+									  					            <!-- /.info-box-content -->
+					        	  </div>
+										   <!-- /.info-box -->
+						        </div>
+								  <!-- /.col -->
+								<div class="card-body ">
+<div class="card  card-box">
 					{% include 'base.html' %}
 
 							<script>
@@ -116,70 +173,72 @@
 
 								{% endblock %}
 							</script>
+								</div>
+								</div>
 						<!-- start widget -->
-					 <img src="{% static 'image/home2.jpg' %}" height="550" width="1080">
-					<br><br>
-					<br><br>
-						<div class="state-overview">
-							<div class="row">
-						        <div class="col-xl-3 col-md-6 col-12">
-						          <div class="info-box bg-white">
-						            <span class="info-box-icon push-center bg-primary"><i class="material-icons">group</i></span>
-					    	        <div class="info-box-content">
-										<a href="/specialization/">
-                                	    <span class="info-box-text">Specialization</span>
-						              <span class="info-box-number">{{ sc }}</span>
-										</a>
+								<img src="{% static 'image/home2.jpg' %}" height="550" width="1080">
+								<br>
+								<br>
+								<div class="row">
+									<div class="col col-12">
+										<img src="{% static 'image/doctor.jpg' %}" height=500 width=400>
+										<img src="{% static 'image/doctor1.jpg' %}" height=500 width=600>
+
 									</div>
-						            <!-- /.info-box-content -->
-						          </div>
-						          <!-- /.info-box -->
-					    	    </div>
-					        	<!-- /.col -->
-						        <div class="col-xl-3 col-md-6 col-12">
-						          <div class="info-box bg-white">
-						            <span class="info-box-icon push-center bg-warning"><i class="material-icons">group</i></span>
-						            <div class="info-box-content">
-										<a href="/doctor/">
-						              <span class="info-box-text">Doctor</span>
-					    	          <span class="info-box-number">{{ dc }}</span>
-					        	    	</a>
+
+								</div>
+								<div class="card-body ">
+
+									<div class="table-scrollable">
+										<table class="table table-hover table-checkable order-column full-width" id="example4">
+											<thead>
+												<tr class="center">
+{#                                             		<th>Appointment Id</th>#}
+													<th>Appointment Date</th>
+													<th>Appointment Time</th>
+													<th>Status</th>
+													<th>Appointment Description</th>
+{#                                                  <th>Payment Date</th>#}
+{#                                              	<th>Amount</th>#}
+{#                                                	<th>Payment Status</th>#}
+													<th>Doctor</th>
+													<th>Patient</th>
+{#                                                  <th>Action</th>#}
+												</tr>
+											</thead>
+
+											<tbody>
+												{% for appointment in a %}
+													<tr class="center">
+{#                                                  	<td>{{ appointment.appointment_id }}</td>#}
+														<td>{{ appointment.appointment_date|date:" d M, Y" }}</td>
+														<td>{{ appointment.appointment_time }}</td>
+{#                                                		<td>{{ appointment.status }}</td>#}
+														{%  if appointment.status  == 0 %}
+															<td>Pending</td>
+														{%   elif appointment.status  == 1 %}
+															<td>Confirm / Not Confirm</td>
+														{%   elif appointment.status  == 2 %}
+															<td>Reject</td>
+														{%   elif appointment.status  == 3 %}
+															<td>Confirm</td>
+														{%   elif appointment.status  == 4 %}
+															<td>Not Confirm</td>
+														{% endif %}
+														<td>{{ appointment.a_description }}</td>
+{#                                                      <td>{{ appointment.payment_date }}</td>#}
+{#                                                      <td>{{ appointment.amount }}</td>#}
+{#                                                      <td>{{ appointment.payment_status }}</td>#}
+														<td>{{ appointment.doctor_id.doctor_name }}</td>
+														<td>{{ appointment.patient_id.patient_name }}</td>
+{#                                                                                                                        </tr>
+												{% endfor %}
+											</tbody>
+										</table>
 									</div>
-						            <!-- /.info-box-content -->
-						          </div>
-						          <!-- /.info-box -->
-						        </div>
-						        <!-- /.col -->
-						        <div class="col-xl-3 col-md-6 col-12">
-					    	      <div class="info-box bg-white">
-					        	    <span class="info-box-icon push-center bg-success"><i class="material-icons">group</i></span>
-					            	<div class="info-box-content">
-										<a href="/patient/">
-					            	  <span class="info-box-text">Patient</span>
-						              <span class="info-box-number">{{ pc }}</span>
-										</a>
-					    	        </div>
-					        	    <!-- /.info-box-content -->
-					         	 </div>
-						          <!-- /.info-box -->
-						        </div>
-						        <!-- /.col -->
-						        <div class="col-xl-3 col-md-6 col-12">
-					    	      <div class="info-box bg-white">
-					        	    <span class="info-box-icon push-center bg-info"><i class="material-icons">insert_invitation</i></span>
-						            <div class="info-box-content">
-										<a href="/appointment/">
-						              <span class="info-box-text">Appointment</span>
-						              <span class="info-box-number">{{ ac }}</span>
-										</a>
-									</div>
-									  					            <!-- /.info-box-content -->
-					        	  </div>
-										   <!-- /.info-box -->
-						        </div>
-								  <!-- /.col -->
-						      </div>
-									</div>
+								</div>
                     	    </div>
 						</div>
+				</div>
+			</div>
 {% endblock %}
